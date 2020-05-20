@@ -1,2 +1,3 @@
 node_modules
 foodify-frontend/.env
+foodify-backend/.env
