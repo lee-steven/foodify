@@ -24,7 +24,7 @@ TBA
 TBA
 
 ## Contribute
-TBA
+Let me know if you want to work on it together! Always looking for an outside perspective.
 
 ## Acknowledgments
 [Spoonacular API](http://spoonacular.com/) — Retrieves recipes
