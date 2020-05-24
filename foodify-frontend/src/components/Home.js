@@ -9,7 +9,10 @@ import './Home.css'
 // CSS
 const container = {
   display: 'grid',
-  gridTemplateColumns: '2fr 1fr',
+  gridTemplateColumns: '12fr 4fr',
+  height: '92%',
+  marginTop: 0,
+  paddingTop: 0,
 }
 const inputFields = { 
   marginBottom: '13px'
@@ -75,9 +78,6 @@ const Home = () => {
   const handleAddSubmit = (event) => {
     event.preventDefault()
 
-
-
-
     let name = document.getElementById('itemName').value
     let quantity = document.getElementById('itemQuantity').value
     let date = document.getElementById('itemDate').value
@@ -117,7 +117,6 @@ const Home = () => {
 
   // Handles submit for selected grocery items to search for recipes
   const handleSubmit = (event) => {
-    event.preventDefault()
     const groceryList = document.getElementsByClassName('grocery')
     let checkedIngredients = []
 
@@ -136,7 +135,6 @@ const Home = () => {
 
   }
 
-
   // Opens add grocery item modal
   const modalButtonClick = () => {
     let modal = document.getElementById("myModal");
@@ -154,11 +152,17 @@ const Home = () => {
       modal.style.display = "none";
     }
   }
+  const handleCancelButton = () => {
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none"
+  }
 
   return (
-    <div>
+    <div style={{height: '100%'}}>
+        <nav style={{height: '5%', margin: 0, padding: '10px 0 15px 0', borderBottom: '1px solid #E0E0E0'}}>
+          <h3 style={{paddingLeft: '50px', fontSize: '24px', color: '#292929', margin: '10px 0'}}>foodify</h3>
+        </nav>
 
-        <button id="myBtn" onClick={modalButtonClick}>Add Groceries</button>
         <div id="myModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeButton}>&times;</span>
@@ -181,19 +185,20 @@ const Home = () => {
                 </div>
 
               <div style={{textAlign: 'right'}}>
-              <button className="buttonDefault" style={cancelButton}>Cancel</button>
+              <button className="buttonDefault" style={cancelButton} onClick={handleCancelButton}>Cancel</button>
               <input type='submit' value='Add Grocery' style={addButton}/>
               </div>
             </form>
           </div>
         </div>
 
-        <p>{message}</p>
 
         <div style={container}>
-          <MyGroceries groceries={groceries} handleSubmit={handleSubmit} />
+          <MyGroceries groceries={groceries} handleSubmit={handleSubmit} modalButtonClick={modalButtonClick}/>
           <Recipes recipes={recipes} />
         </div>
+        
+        {/* TODO ADD MESSAGE VARIABLE */}
     </div>
   )
 }

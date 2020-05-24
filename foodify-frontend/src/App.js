@@ -10,8 +10,8 @@ import './App.css';
 const App = () => {
 
   return (
-    <Router>
-      <Switch>
+    <Router style={{height: '100%'}}>
+      <Switch style={{height: '100%'}}>
         <Route path="/" exact component={Welcome} />
         <Route path="/home" exact component={Home} />
         <Route path="/home/:id" component={RecipeDetails} />
