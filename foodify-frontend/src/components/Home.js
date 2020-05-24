@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import Navigation from './Navigation'
 import MyGroceries from './MyGroceries'
 import Recipes from './Recipes'
 
@@ -159,9 +160,8 @@ const Home = () => {
 
   return (
     <div style={{height: '100%'}}>
-        <nav style={{height: '5%', margin: 0, padding: '10px 0 15px 0', borderBottom: '1px solid #E0E0E0'}}>
-          <h3 style={{paddingLeft: '50px', fontSize: '24px', color: '#292929', margin: '10px 0'}}>foodify</h3>
-        </nav>
+   
+        <Navigation />
 
         <div id="myModal" className="modal">
           <div className="modal-content">

@@ -10,6 +10,7 @@ const heading = {
 }
 const container = {
   padding: '0 30px 0px 30px',
+  marginRight: '10px',
   height: '100%',
   overflow: 'scroll',
   borderBottom: '1px solid #E0E0E0',
@@ -22,7 +23,7 @@ const Recipes = ({recipes}) => {
           <h2 style={heading}>Recipes</h2>
               {recipes.map(recipe => {
               return (
-                <div key={recipe.id} style={{width: '80%', height: '230px', paddingBottom: '15px'}} >
+                <div key={recipe.id} style={{width: '80%', height: '230px', paddingBottom: '5px'}} >
                   <Link                
                     to={{
                       pathname:`/home/${recipe.id}`,
@@ -30,7 +31,7 @@ const Recipes = ({recipes}) => {
                       missedIngredients:recipe.missedIngredients
                     }}
                   >
-                    <img src={recipe.image} alt={recipe.title}  id={recipe.id} style={{maxWidth: '306px',  filter: 'brightness(70%)', borderRadius: '10px'}}/>
+                    <img src={recipe.image} alt={recipe.title}  id={recipe.id} style={{width: '120%', maxWidth: '306px',  filter: 'brightness(70%)', borderRadius: '10px'}}/>
                   </Link>
                   <h4 style={{width: '80%', overflowWrap: 'break-word', position: 'relative', top: '-80px', left: '10px', color: 'white', fontSize: '20px'}}>{recipe.title}</h4>
                 </div>
