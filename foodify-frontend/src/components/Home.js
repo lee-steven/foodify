@@ -4,6 +4,51 @@ import axios from 'axios'
 import MyGroceries from './MyGroceries'
 import Recipes from './Recipes'
 
+import './Home.css'
+
+// CSS
+const container = {
+  display: 'grid',
+  gridTemplateColumns: '2fr 1fr',
+}
+const inputFields = { 
+  marginBottom: '13px'
+}
+const fieldLabel = {
+  color: 'gray',
+  fontWeight: 500,
+  fontSize: '14px',
+}
+const field = {
+  border: '1px solid #dbdbdb',
+  borderRadius: '3px',
+  padding: '7px 5px',
+  outline: 'none'
+}
+const cancelButton = {
+  borderStyle: 'none',
+  border: '1px solid lightgray',
+  borderRadius: '5px',
+  padding: '10px 30px',
+  margin: '15px 10px 5px 0px',
+  fontSize: '14px',
+  outline: 'none',
+  cursor: 'pointer'
+}
+const addButton = {
+  borderStyle: 'none',
+  border: '1px solid #48AB5F',
+  borderRadius: '5px',
+  backgroundColor: '#48AB5F',
+  padding: '10px 50px',
+  margin: '15px 0px 5px 10px',
+  fontSize: '14px',
+  color: 'white',
+  outline: 'none',
+  cursor: 'pointer'
+
+}
+
 const Home = () => {
   const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
   const [ message, setNewMessage ] = useState('')
@@ -26,12 +71,16 @@ const Home = () => {
     }
   ])
 
-
+  // Handles adding Grocery Item
   const handleAddSubmit = (event) => {
     event.preventDefault()
-    const name = document.getElementById('itemName').value
-    const quantity = document.getElementById('itemQuantity').value
-    const date = document.getElementById('itemDate').value
+
+
+
+
+    let name = document.getElementById('itemName').value
+    let quantity = document.getElementById('itemQuantity').value
+    let date = document.getElementById('itemDate').value
     
     if(!name || !quantity || !date){
       setNewMessage('Please fill out all fields')
@@ -49,12 +98,24 @@ const Home = () => {
     
     setGroceries([...groceries, newGroceryItem])
 
+    // Close Modal and clear input fields
+    document.getElementById('itemName').value = ''
+    document.getElementById('itemQuantity').value = ''
+    document.getElementById('itemDate').value = ''
+    
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none"
+
+
     setNewMessage('Grocery Item has successfully been added')
     setInterval(() => {
       setNewMessage('')
     }, 3000)
+
+
   }
 
+  // Handles submit for selected grocery items to search for recipes
   const handleSubmit = (event) => {
     event.preventDefault()
     const groceryList = document.getElementsByClassName('grocery')
@@ -72,24 +133,67 @@ const Home = () => {
       .then(response => {
         setRecipes(response.data)
       })
+
+  }
+
+
+  // Opens add grocery item modal
+  const modalButtonClick = () => {
+    let modal = document.getElementById("myModal");
+    modal.style.display = "block";
+  }
+  // Closes Modal on 'x' click
+  const closeButton = () => {
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none"
+  }
+  // Closes modal on window click
+  window.onclick = function(event) {
+    let modal = document.getElementById("myModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
   }
 
   return (
     <div>
-        <h1>Foodify</h1>
+
+        <button id="myBtn" onClick={modalButtonClick}>Add Groceries</button>
+        <div id="myModal" className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeButton}>&times;</span>
+            <h2>Add Grocery Item</h2>
+
+            <form onSubmit={handleAddSubmit} style ={{paddingTop: '20px'}}>
+              <div style={inputFields}>
+                <label style={fieldLabel}>item </label><br />
+                <input type='text' id='itemName' style={field}/> <br />
+              </div>
+
+              <div style={inputFields}>
+                <label style={fieldLabel}>quantity</label><br />
+                <input type='number' id='itemQuantity' style={field}/> <br />
+              </div>
+
+              <div style={inputFields}>
+                <label style={fieldLabel}>expiration date</label><br />
+                <input type='date' id='itemDate' style={field}/> <br />
+                </div>
+
+              <div style={{textAlign: 'right'}}>
+              <button className="buttonDefault" style={cancelButton}>Cancel</button>
+              <input type='submit' value='Add Grocery' style={addButton}/>
+              </div>
+            </form>
+          </div>
+        </div>
+
         <p>{message}</p>
-        <form onSubmit={handleAddSubmit}>
-          <label>Item</label><input type='text' id='itemName'/> <br />
-          <label>Quantity</label><input type='number' id='itemQuantity'/> <br />
-          <label>Expiration Date</label><input type='date' id='itemDate'/> <br />
-          <input type='submit' value='Add Grocery'/>
-        </form>
 
-        <h2>My Groceries</h2>
-        <MyGroceries groceries={groceries} handleSubmit={handleSubmit} />
-
-        <h2>Recipes</h2>
-        <Recipes recipes={recipes} />
+        <div style={container}>
+          <MyGroceries groceries={groceries} handleSubmit={handleSubmit} />
+          <Recipes recipes={recipes} />
+        </div>
     </div>
   )
 }
