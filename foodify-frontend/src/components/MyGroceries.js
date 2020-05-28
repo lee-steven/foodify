@@ -33,7 +33,7 @@ const handleSubmitButton = {
   border: '1px solid #48AB5F', 
   borderRadius:'15px', 
   backgroundColor: '#48AB5F', 
-  width: '180px', 
+  width: '200px', 
   height: '40px', 
   outline: 'none', 
   cursor: 'pointer', 
