@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import LoadingIndicator from './LoadingIndicator'
+
 // CSS
 const heading = {
   padding: '20px 0 30px 0',
@@ -21,6 +23,7 @@ const Recipes = ({recipes}) => {
     return (
         <div style={container} >
           <h2 style={heading}>Recipes</h2>
+              <LoadingIndicator />
               {recipes.map(recipe => {
               return (
                 <div key={recipe.id} style={{width: '80%', height: '230px', paddingBottom: '5px'}} >

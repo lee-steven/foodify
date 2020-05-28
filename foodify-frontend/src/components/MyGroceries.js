@@ -1,4 +1,6 @@
 import React from 'react'
+import trashIcon from '../images/trash.png'
+import searchIcon from '../images/searchIcon.png'
 
 // CSS
 const heading = {
@@ -71,14 +73,18 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
                 </div>
                 <label style={{textAlign: 'center'}}>{grocery.quantity}</label>
                 <label style={{textAlign: 'center'}}>Expires in 1 day</label>
-                {/* TODO: Add Trash Icon */}
-                <label style={{textAlign: 'right'}}>delete</label>
+                <span style={{textAlign: 'right'}}>
+                  <img src={trashIcon} height='15px' alt='delete' />
+                </span>
               </div>
             )
           })}
       </div>
-      {/* TODO: Add Search Icon */}
-      <button onClick={handleSubmit} style={handleSubmitButton}>Search Recipes</button>
+
+      <button onClick={handleSubmit} style={handleSubmitButton}>
+          <img src={searchIcon} height='15px' alt="" style={{paddingRight: '10px', position: 'relative', bottom: '-2px'}}/>
+        Search Recipes
+      </button>
       <button onClick={modalButtonClick} style={modalButton}>
         <label style={{fontSize: '14px', fontWeight: 600, color: 'white', zIndex: -1, cursor: 'pointer'}}>+ Add New Grocery</label>
       </button>

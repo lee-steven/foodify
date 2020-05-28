@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { trackPromise } from 'react-promise-tracker'
+
 
 import Navigation from './Navigation'
 import MyGroceries from './MyGroceries'
@@ -52,6 +54,8 @@ const addButton = {
   cursor: 'pointer'
 
 }
+
+
 
 const Home = () => {
   const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
@@ -129,10 +133,12 @@ const Home = () => {
     }
 
     // Retrieves recipes from API based on selected ingredients
-    axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${checkedIngredients.map(ingredient => `${ingredient},+`)}&number=15&apiKey=${API_KEY}`)
-      .then(response => {
-        setRecipes(response.data)
+    trackPromise(
+      axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${checkedIngredients.map(ingredient => `${ingredient},+`)}&number=15&apiKey=${API_KEY}`)
+        .then(response => {
+          setRecipes(response.data)
       })
+    )
 
   }
 
@@ -158,11 +164,11 @@ const Home = () => {
     modal.style.display = "none"
   }
 
+  
   return (
     <div style={{height: '100%'}}>
    
         <Navigation />
-
         <div id="myModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeButton}>&times;</span>

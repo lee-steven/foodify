@@ -7,8 +7,9 @@ import RecipeDetails from './components/RecipeDetails'
 
 import './App.css';
 
-const App = () => {
 
+
+const App = () => {
   return (
     <Router style={{height: '100%'}}>
       <Switch style={{height: '100%'}}>
