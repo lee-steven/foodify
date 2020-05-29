@@ -38,7 +38,7 @@ const styleButton = {
 
 const Login = () => {
     return (
-        <div style={{margin: '20vh auto', width: '430px'}}>
+        <div style={{margin: '0 auto', paddingTop: '20vh', width: '430px', height: 'auto',}}>
             <span>
                 <img src={foodifyLogo} alt="foodify Logo" height='40px' style={{display: 'inline-block', paddingRight: '10px'}}/>
                 <h1 style={{display: 'inline-block',  color: '#292929', position: 'relative', bottom: '10px'}}>foodify</h1>
@@ -59,6 +59,10 @@ const Login = () => {
                     </div>
                     <button style={styleButton}>Sign in</button>
                 </form>
+            </div>
+            <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
+                <label>Don't have an account?</label><br/>
+                <a href="">Sign up</a>
             </div>
         </div>
     )
