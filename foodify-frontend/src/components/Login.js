@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import loginService from '../services/login'
+import groceryService from '../services/groceries'
 
 import foodifyLogo from '../images/logo.png'
 
@@ -37,6 +39,26 @@ const styleButton = {
 }
 
 const Login = () => {
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [ user, setUser ] = useState(null)
+
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        try{
+            const user = await loginService.login({
+                email, password
+            })
+            console.log('Login successful! ', user)
+            groceryService.setToken(user.token)
+            setUser(user)
+            setEmail('')
+            setPassword('')
+        } catch(exception) {
+            console.log('Wrong Credentials')
+        }
+    }
+
     return (
         <div style={{margin: '0 auto', paddingTop: '20vh', width: '430px', height: 'auto',}}>
             <span>
@@ -48,21 +70,24 @@ const Login = () => {
                     <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Sign in</h2>
                     <p style={{textDecoration: 'underline', fontSize: '12px', display: 'inline-block', float: 'right', position: 'relative', bottom: -6, color: '#636363'}}>Forgot password?</p>
                 </div>
-                <form>
+
+                <form onSubmit={handleLogin}>
                     <div>
                         <label style={label}>Email</label>
-                        <input type='text' style={styleInputField} />
+                        <input type='text' value={email} onChange={({target}) => setEmail(target.value)} style={styleInputField} />
                     </div>
                     <div>
                         <label style={label}>Password</label>
-                        <input type='password' style={styleInputField} />
+                        <input type='password' style={styleInputField} value={password} onChange={({target}) => setPassword(target.value)}/>
                     </div>
-                    <button style={styleButton}>Sign in</button>
+                    <button style={styleButton} type='submit'>Sign in</button>
                 </form>
+
             </div>
+
             <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
                 <label>Don't have an account?</label><br/>
-                <a href="">Sign up</a>
+                <button>Sign up</button>
             </div>
         </div>
     )

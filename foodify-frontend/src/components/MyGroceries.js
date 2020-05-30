@@ -1,4 +1,5 @@
 import React from 'react'
+
 import trashIcon from '../images/trash.png'
 import searchIcon from '../images/searchIcon.png'
 
@@ -58,13 +59,14 @@ const modalButton = {
 }
 
 const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
+
   return (
     <div style={container}>
       <div>
         <h2 style={heading}>My Groceries</h2>
       </div>
       <div style={groceriesContainer}>
-          {groceries.map(grocery => {
+          {groceries && groceries.map(grocery => {
             return (
               <div key={grocery.name} style={groceryItem}>
                 <div>
