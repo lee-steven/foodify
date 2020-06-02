@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import groceryServices from '../services/groceries'
+import { useLocation, useHistory } from "react-router-dom";
 
 import { trackPromise } from 'react-promise-tracker'
 
@@ -59,16 +60,29 @@ const addButton = {
 
 
 
-const Home = () => {
+const Home = (props) => {
   const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
   const [ message, setNewMessage ] = useState('')
   const [ recipes, setRecipes ] = useState([])
   const [ groceries, setGroceries ] = useState([])
+  const location = useLocation()
+  const history = useHistory()
 
   useEffect( () => {
     groceryServices.getAll()
-    .then(response => setGroceries(response))
+    .then(response => { 
+      console.log(response)
+      setGroceries(response)} 
+    )
   }, [])
+
+  useEffect(() => {
+    console.log(location.pathname)
+    if(location.state){
+      console.log(location.state.user)
+    }
+ 
+  }, [location])
 
   // Handles adding Grocery Item
   const handleAddSubmit = (event) => {

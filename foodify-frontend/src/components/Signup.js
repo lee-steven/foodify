@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { useHistory, Redirect } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 
-import loginService from '../services/login'
-import groceryService from '../services/groceries'
-import auth from '../services/auth'
+// import loginService from '../services/login'
 
 import foodifyLogo from '../images/logo.png'
 
@@ -41,36 +39,15 @@ const styleButton = {
     cursor: 'pointer',
 }
 
-const Login = () => {
+const Signup = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ user, setUser ] = useState(null)
     const [ message, setMessage ] = useState(' ')
     const history = useHistory()
 
-    const handleLogin = async (event) => {
+    const handleSignup = async (event) => {
         event.preventDefault()
-        try{
-            const user = await loginService.login({
-                email, password
-            })
-            console.log('Login successful! ', user)
-            auth.login()
-            groceryService.setToken(user.token)
-            setUser(user)
-            setEmail('')
-            setPassword('')
-            history.push('/home')
-            // history.push({
-            //     pathName: '/home',
-            //     state: { user: user }
-            // })
-        } catch(exception) {
-            setMessage('Wrong username or password')
-            setTimeout(() => {
-                setMessage(' ')
-            }, 5000);
-        }
     }
 
     return (
@@ -81,13 +58,12 @@ const Login = () => {
             </span>
             <div style={ container }>
                 <div style={{marginBottom: '12px'}}>
-                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Sign in</h2>
-                    <p style={{textDecoration: 'underline', fontSize: '12px', display: 'inline-block', float: 'right', position: 'relative', bottom: -6, color: '#636363'}}>Forgot password?</p>
+                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Create account</h2>
                 </div>
 
                 <p style={{color: 'red', fontSize: '13px', textAlign: 'center', height: '10px'}}>{message}</p>
 
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSignup}>
                     <div>
                         <label style={label}>Email</label>
                         <input type='text' value={email} onChange={({target}) => setEmail(target.value)} style={styleInputField} />
@@ -96,17 +72,21 @@ const Login = () => {
                         <label style={label}>Password</label>
                         <input type='password' style={styleInputField} value={password} onChange={({target}) => setPassword(target.value)}/>
                     </div>
-                    <button style={styleButton} type='submit'>Sign in</button>
+                    <div>
+                        <label style={label}>Confirm Password</label>
+                        <input type='password' style={styleInputField} value={password} onChange={({target}) => setPassword(target.value)}/>
+                    </div>
+                    <button style={styleButton} type='submit'>Sign up</button>
                 </form>
 
             </div>
 
             <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
-                <label>Don't have an account?</label><br/>
-                <button>Sign up</button>
+                <label>Already have an account?</label><br/>
+                <button>Log in</button>
             </div>
         </div>
     )
 }
 
-export default Login
+export default Signup

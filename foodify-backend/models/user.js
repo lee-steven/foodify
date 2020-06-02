@@ -12,10 +12,25 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     groceries: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Grocery'
-        }
+        // {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'Grocery'
+        // }
+        // {
+        //     name: {
+        //         type: String,
+        //         required: true,
+        //     },
+        //     quantity: {
+        //         type: Number,
+        //         required: true
+        //     },
+        //     expiration: Date,
+        //     user: {
+        //         type: mongoose.Schema.Types.ObjectId,
+        //         ref: 'User'
+        //     }
+        // }
     ]
 })
 
