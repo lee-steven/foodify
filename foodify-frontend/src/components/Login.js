@@ -53,18 +53,14 @@ const Login = () => {
         try{
             const user = await loginService.login({
                 email, password
-            })
+            }) // returns token, email, first/last name, id
             console.log('Login successful! ', user)
-            auth.login()
+            auth.login(user.id)
             groceryService.setToken(user.token)
             setUser(user)
             setEmail('')
             setPassword('')
             history.push('/home')
-            // history.push({
-            //     pathName: '/home',
-            //     state: { user: user }
-            // })
         } catch(exception) {
             setMessage('Wrong username or password')
             setTimeout(() => {

@@ -20,6 +20,11 @@ groceriesRouter.get('/', async (request, response) => {
     response.json(groceries.map(grocery => grocery.toJSON()))
 })
 
+groceriesRouter.get('/:id', async (request, response) => {
+    const grocery = await Grocery.findById(request.params.id)
+    response.json(grocery.toJSON())
+})
+
 // Adding NEW grocery to MongoDB
 groceriesRouter.post('/', async (request, response) => {
     const body = request.body

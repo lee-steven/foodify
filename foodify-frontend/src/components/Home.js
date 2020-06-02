@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import auth from '../services/auth'
 import groceryServices from '../services/groceries'
+import userServices from '../services/users'
 import { useLocation, useHistory } from "react-router-dom";
 
 import { trackPromise } from 'react-promise-tracker'
@@ -69,11 +71,16 @@ const Home = (props) => {
   const history = useHistory()
 
   useEffect( () => {
-    groceryServices.getAll()
-    .then(response => { 
-      console.log(response)
-      setGroceries(response)} 
-    )
+    userServices.getUser(auth.getUserId())
+    .then(response => response.groceries) // array of grocery ids
+    .then(groceryItems => {
+      groceryItems.forEach(grocery => {
+        groceryServices.getById(grocery)
+        .then(response => {
+          setGroceries(state => [...state, response])
+        })
+      })
+    })
   }, [])
 
   useEffect(() => {
