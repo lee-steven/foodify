@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, Redirect, Link } from 'react-router-dom'
 
 import loginService from '../services/login'
@@ -48,12 +48,25 @@ const Login = () => {
     const [ message, setMessage ] = useState(' ')
     const history = useHistory()
 
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedFoodifyUser')
+        if(loggedUserJSON) {
+            const user = JSON.parse(loggedUserJSON)
+            setUser(user)
+            auth.login(user.id)
+            groceryService.setToken(user.token)
+            history.push('/home')
+        }
+    })
+
     const handleLogin = async (event) => {
         event.preventDefault()
         try{
             const user = await loginService.login({
                 email, password
             }) // returns token, email, first/last name, id
+
+            window.localStorage.setItem('loggedFoodifyUser', JSON.stringify(user))
             console.log('Login successful! ', user)
             auth.login(user.id)
             groceryService.setToken(user.token)

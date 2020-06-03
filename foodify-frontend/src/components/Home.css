@@ -35,3 +35,7 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+.scrollable::-webkit-scrollbar {
+  display: none;
+}

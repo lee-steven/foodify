@@ -61,11 +61,11 @@ const modalButton = {
 const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
 
   return (
-    <div style={container}>
+    <div style={container} >
       <div>
         <h2 style={heading}>My Groceries</h2>
       </div>
-      <div style={groceriesContainer}>
+      <div style={groceriesContainer} className='scrollable'>
           {groceries && groceries.map(grocery => {
             return (
               <div key={grocery.name} style={groceryItem}>

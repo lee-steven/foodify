@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
 import greenBackground from '../images/greensBackground.png'
-// import background from '../images/background.png'
 
 const logInButton = {
     border: 'none',
@@ -10,9 +9,9 @@ const logInButton = {
     fontFamily: 'degular, Helvetica, Arial, sans-serif',
     fontSize: '18px',
     fontWeight: 700,
-    color: 'white',
+    color: 'gray',
     position: 'relative', 
-    top: '10px',
+    top: '13px',
     paddingRight: '40px',
     cursor: 'pointer',
     outline: 'none',
@@ -25,10 +24,10 @@ const signUpButton = {
     fontWeight: 700,
     color: '#48AB5F',
     position: 'relative', 
-    top: '10px',
+    top: '13px',
     cursor: 'pointer',
     outline: 'none',
-
+    textDecoration: 'underline'
 }
 const inputField = {
     border: '1px solid lightgray',
@@ -50,6 +49,7 @@ const submitButton = {
     fontSize: '15px',
     marginLeft: '25px',
     fontFamily: 'degular, Helvetica, Arial, sans-serif',
+    fontWeight: 700,
     cursor: 'pointer', 
     outline: 'none'
 }
@@ -62,35 +62,16 @@ const background = {
     right: 0,
     top: 0,
     zIndex: '-1',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    filter: 'brightness(0.9) contrast(120%)',
 }
-// const backgroundStyle = {
-//     position: 'absolute',
-//     top: -40,
-//     right: -50,
-//     height: '105vh',
-//     overflow: 'hidden',
-//     zIndex: -1,
-    
-// }
-// const backgroundOverlay ={
-//     position: 'absolute',
-//     top: -40,
-//     right: -50,
-//     height: '105vh',
-//     width: '60vw',
-//     overflow: 'hidden',
-//     zIndex: 1, 
-//     backgroundColor: 'rgba(255, 255, 255, 0.5)',
 
-//     backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1))',
-// }
 const Welcome = () => {
     return (
         <div style={{overflow: 'hidden'}}>
-            <nav style={{display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '20px 40px', zIndex: 2}}>
+            <nav style={{display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '10px 40px', zIndex: 2, backgroundColor: 'white', borderBottom: '1px solid lightgray', height: '40px'}}>
                 <span style={{display: 'inline-block'}}>
-                    <img src={logo} alt='foodifyLogo'  height='40px' style={{display: 'inline-block'}}/>
+                    <img src={logo} alt='foodifyLogo'  height='37px' style={{display: 'inline-block'}}/>
                     <h2 style={{display: 'inline-block', color: '#292929', position: 'relative', bottom: '10px', paddingLeft: '15px'}}>foodify</h2>
                 </span>
                 <span style={{textAlign: 'right'}}>
@@ -103,7 +84,7 @@ const Welcome = () => {
                 </span>
             </nav>
 
-            <div style={{display: 'grid', gridTemplateColumns: '2fr 3fr', padding: '12vh 8vw'}}>
+            <div style={{display: 'grid', gridTemplateColumns: '2fr 3fr', padding: '17vh 8vw'}}>
                 <div>
                     <h1 style={{ fontSize: '55px', color: '#292929'}}>Reduce food waste</h1>
                     <p style={{ fontSize: '24px', color: 'gray'}}>
@@ -118,8 +99,6 @@ const Welcome = () => {
                 </div>
                 <div>
                     <img src={greenBackground} alt='greenBackground' style={background} />
-                    {/* <img src={background} alt='background' style={backgroundStyle}/>
-                    <div style={backgroundOverlay}></div> */}
                 </div>
             </div>
         </div>

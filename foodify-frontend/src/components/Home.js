@@ -178,7 +178,7 @@ const Home = (props) => {
 
   
   return (
-    <div style={{height: '100%'}}>
+    <div style={{height: '100%', overflow: 'hidden'}}>
    
         <Navigation />
         <div id="myModal" className="modal">

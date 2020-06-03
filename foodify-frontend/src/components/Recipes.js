@@ -13,7 +13,7 @@ const heading = {
 const container = {
   padding: '0 30px 0px 30px',
   marginRight: '10px',
-  height: '100%',
+  maxHeight: '100%',
   overflow: 'scroll',
   borderBottom: '1px solid #E0E0E0',
 }
@@ -21,7 +21,7 @@ const container = {
 
 const Recipes = ({recipes}) => {
     return (
-        <div style={container} >
+        <div style={container}   className='scrollable'>
           <h2 style={heading}>Recipes</h2>
               <LoadingIndicator />
               {recipes.map(recipe => {
