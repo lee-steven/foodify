@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory, Redirect } from 'react-router-dom'
+import { useHistory, Redirect, Link } from 'react-router-dom'
 
 import loginService from '../services/login'
 import groceryService from '../services/groceries'
@@ -99,7 +99,9 @@ const Login = () => {
 
             <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
                 <label>Don't have an account?</label><br/>
-                <button>Sign up</button>
+                <Link to='/signup'>
+                    <button style={{border: 'none', backgroundColor: 'transparent', padding: '0', fontFamily: 'degular, Helvetica, Arial, sans-serif', textDecoration: 'underline', outline: 'none', cursor: 'pointer' }}>Sign up</button>
+                </Link>
             </div>
         </div>
     )

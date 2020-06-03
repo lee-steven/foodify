@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useHistory} from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
+
 
 // import loginService from '../services/login'
 
@@ -74,7 +75,7 @@ const Signup = () => {
                     </div>
                     <div>
                         <label style={label}>Confirm Password</label>
-                        <input type='password' style={styleInputField} value={password} onChange={({target}) => setPassword(target.value)}/>
+                        <input type='password' style={styleInputField}/>
                     </div>
                     <button style={styleButton} type='submit'>Sign up</button>
                 </form>
@@ -83,7 +84,9 @@ const Signup = () => {
 
             <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
                 <label>Already have an account?</label><br/>
-                <button>Log in</button>
+                <Link to='/login'>
+                    <button style={{border: 'none', backgroundColor: 'transparent', padding: '0', fontFamily: 'degular, Helvetica, Arial, sans-serif', textDecoration: 'underline', outline: 'none', cursor: 'pointer' }}>Log in</button>
+                </Link>
             </div>
         </div>
     )
