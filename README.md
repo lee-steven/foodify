@@ -6,11 +6,11 @@ As a college student who was transitioning to living off-campus and learning to 
 
 
 ## Screenshots
-![alt text](https://github.com/lee-steven/foodify/tree/master/images/welcome.png)
-![alt text](https://github.com/lee-steven/foodify/tree/master/images/login.png)
-![alt text](https://github.com/lee-steven/foodify/tree/master/images/home.png)
-![alt text](https://github.com/lee-steven/foodify/tree/master/images/home2.png)
-![alt text](https://github.com/lee-steven/foodify/tree/master/images/recipe.png)
+![Welcome Page](/images/welcome.png)
+![Login](/images/login.png)
+![Home](/images/home.png)
+![Home](/images/home2.png)
+![Recipe Details](/images/recipe.png)
 
 
 ## Tech/Frameworks Used
