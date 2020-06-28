@@ -112,6 +112,8 @@ const Home = (props) => {
       quantity: quantity,
       date: date,
     }
+
+    // groceryServices.create(newGroceryItem)
     
     setGroceries([...groceries, newGroceryItem])
 
@@ -128,8 +130,6 @@ const Home = (props) => {
     setInterval(() => {
       setNewMessage('')
     }, 3000)
-
-
   }
 
   // Handles submit for selected grocery items to search for recipes

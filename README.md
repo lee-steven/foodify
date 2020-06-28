@@ -1,4 +1,4 @@
-# foodify (in development)
+# foodify
 Foodify will help users organize their groceries/pantry by notifying users when ingredients are getting close to expiration, allowing users to choose ingredients they want to use and find recipes with those ingredients, and more.
 
 ## Motivation
@@ -6,7 +6,7 @@ As a college student who was transitioning to living off-campus and learning to 
 
 
 ## Screenshots
-TBA
+
 
 ## Tech/Frameworks Used
 [React](https://reactjs.org/) <br>
