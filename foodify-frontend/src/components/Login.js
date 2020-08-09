@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, Redirect, Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import loginService from '../services/login'
 import groceryService from '../services/groceries'
 import auth from '../services/auth'
-
+import background from '../images/backgroundImage.jpg'
 import foodifyLogo from '../images/logo.png'
+
+const backgroundContainer = {
+    height: '100%',
+    background: `linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,.85)), url(${background})`,
+    backgroundPosition: 'center',
+}
 
 const container = {
     backgroundColor: '#f2f2f2',
@@ -18,7 +24,7 @@ const label = {
     display: 'block'
 }
 const styleInputField = {
-    width: '360px',
+    width: '335px',
     height: '30px',
     border: 'none',
     outline: 'none',
@@ -26,26 +32,37 @@ const styleInputField = {
     marginBottom: '8px', 
     color: 'gray',
     fontSize: '14px',
-    padding: '3px'
+    padding: '5px 15px',
 }
 const styleButton = {
     border: 'none',
     width: '368px',
-    backgroundColor: '#48AB5F',
+    backgroundColor: '#39B54A',
     color: 'white',
     borderRadius: '5px',
-    padding: '9px 10px',
+    padding: '13px 10px',
     margin: '10px 0',
-    fontSize: '14px',
+    fontFamily: 'degular, arial',
+    fontSize: '16px',
     outline: 'none',
     cursor: 'pointer',
+}
+const redirectLink = {
+    border: 'none', 
+    backgroundColor: 'transparent',
+    padding: '0', 
+    fontFamily: 'degular, Helvetica, Arial, sans-serif', 
+    fontWeight: 600,
+    outline: 'none', 
+    cursor: 'pointer',
+    color: '#39B54A',
 }
 
 const Login = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ user, setUser ] = useState(null)
-    const [ message, setMessage ] = useState(' ')
+    const [ message, setMessage ] = useState('')
     const history = useHistory()
 
     useEffect(() => {
@@ -83,6 +100,7 @@ const Login = () => {
     }
 
     return (
+        <div style={backgroundContainer}>
         <div style={{margin: '0 auto', paddingTop: '18vh', width: '430px', height: 'auto',}}>
             <span>
                 <img src={foodifyLogo} alt="foodify Logo" height='40px' style={{display: 'inline-block', paddingRight: '10px'}}/>
@@ -90,7 +108,7 @@ const Login = () => {
             </span>
             <div style={ container }>
                 <div style={{marginBottom: '12px'}}>
-                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Sign in</h2>
+                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Welcome Back!</h2>
                     <p style={{textDecoration: 'underline', fontSize: '12px', display: 'inline-block', float: 'right', position: 'relative', bottom: -6, color: '#636363'}}>Forgot password?</p>
                 </div>
 
@@ -105,17 +123,19 @@ const Login = () => {
                         <label style={label}>Password</label>
                         <input type='password' style={styleInputField} value={password} onChange={({target}) => setPassword(target.value)}/>
                     </div>
-                    <button style={styleButton} type='submit'>Sign in</button>
+                    <button style={styleButton} type='submit'>Log in</button>
                 </form>
 
-            </div>
-
-            <div style={{marginTop: '10px', fontSize: '15px', padding: '10px'}}>
-                <label>Don't have an account?</label><br/>
+                <div style={{marginTop: '7px', fontSize: '14px', }}>
+                <label>Don't have an account? </label>
                 <Link to='/signup'>
-                    <button style={{border: 'none', backgroundColor: 'transparent', padding: '0', fontFamily: 'degular, Helvetica, Arial, sans-serif', textDecoration: 'underline', outline: 'none', cursor: 'pointer' }}>Sign up</button>
+                    <button style={redirectLink}>Sign up</button>
                 </Link>
             </div>
+            </div>
+
+           
+        </div> 
         </div>
     )
 }
