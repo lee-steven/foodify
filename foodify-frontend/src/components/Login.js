@@ -67,7 +67,7 @@ const Login = () => {
             </LogoContainer>
             <FormContainer>
                 <HeadingContainer>
-                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block'}}>Welcome Back!</h2>
+                    <h2 style={{padding: '10px 0', margin: 0, display: 'inline-block', fontWeight: 600}}>Welcome Back!</h2>
                 </HeadingContainer>
 
                 <p style={{color: 'red', fontSize: '13px', textAlign: 'center', height: '10px'}}>{message}</p>

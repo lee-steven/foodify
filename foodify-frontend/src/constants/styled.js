@@ -100,7 +100,7 @@ export const HeadingContainer = styled.div`
 export const Label = styled.label`
     font-size: 13px;
     font-weight: 500;
-    margin-bottom: 5px;,
+    margin-bottom: 7px;
     display: block;
 `
 
@@ -111,8 +111,9 @@ export const InputField = styled.input`
     outline: none;
     border-radius: 3px;
     margin-bottom: 8px; 
-    color: gray;
+    color: #2d2d2d;
     font-size: 14px;
+    font-family: degular, Helvetica, Arial, sans-serif;
     padding: 5px 15px;
 
     @media ${device.mobileS} {
@@ -132,8 +133,9 @@ export const Button = styled.button`
     border-radius: 5px;
     padding: 13px 10px;
     margin: 10px 0;
-    font-family: degular, arial;
+    font-family: degular, Helvetica, Arial, sans-serif;
     font-size: 16px;
+    font-weight: 550;
     outline: none;
     cursor: pointer;
 
