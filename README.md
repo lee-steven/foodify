@@ -1,7 +1,7 @@
-<div style="text-align: center">
-    <img src='https://github.com/lee-steven/foodify/blob/master/images/foodfiyLogo.png' width="400"/>
+<div align="center">
+    <img src='https://raw.githubusercontent.com/lee-steven/foodify/master/images/foodifyLogo.png' width="400"/>
 </div>
-<!-- # foodify -->
+<br />
 Foodify will help users organize their groceries/pantry by notifying users when ingredients are getting close to expiration, allowing users to choose ingredients they want to use and find recipes with those ingredients, and more.
 
 ## Motivation
