@@ -7,30 +7,24 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
+        required: true,
     },
     passwordHash: String,
-    firstName: String,
-    lastName: String,
+    firstName: { 
+        type: String,
+        required: true,
+        min: 1,
+    },
+    lastName: { 
+        type: String,
+        required: true,
+        min: 1,
+    },
     groceries: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Grocery'
         }
-        // {
-        //     name: {
-        //         type: String,
-        //         required: true,
-        //     },
-        //     quantity: {
-        //         type: Number,
-        //         required: true
-        //     },
-        //     expiration: Date,
-        //     user: {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: 'User'
-        //     }
-        // }
     ]
 })
 

@@ -138,6 +138,11 @@ export const Button = styled.button`
     font-weight: 550;
     outline: none;
     cursor: pointer;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+        background-color: #279E42;
+    }
 
     @media ${device.mobileS} {
         max-width: 100%;
@@ -157,4 +162,8 @@ export const RedirectLink = styled.button`
     outline: none;
     cursor: pointer;
     color: #39B54A;
+
+    &: hover {
+        text-decoration: underline;
+    }
 `

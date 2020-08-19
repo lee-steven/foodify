@@ -84,7 +84,6 @@ const Home = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log(location.pathname)
     if(location.state){
       console.log(location.state.user)
     }

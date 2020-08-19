@@ -30,10 +30,10 @@ usersRouter.get('/:id', (request, response) => {
 usersRouter.post('/', async (request, response) => {
     const body = request.body
 
-    if(body === undefined) {
+    if(body === undefined|| !(body.email && body.password && body.firstName && body.lastName)) {
         return response.status(400).json({body})
     }
-
+    
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
    
@@ -42,12 +42,10 @@ usersRouter.post('/', async (request, response) => {
         passwordHash,
         firstName: body.firstName,
         lastName: body.lastName,
-        groceries: body.groceries
     })
 
-    user.save().then(savedUser => {
-        response.json(savedUser)
-    })
+    const savedUser = await user.save()
+    response.json(savedUser)
 })
 
 module.exports = usersRouter

@@ -29,7 +29,7 @@ const Recipes = ({recipes}) => {
                 <div key={recipe.id} style={{width: '80%', height: '230px', paddingBottom: '5px'}} >
                   <Link                
                     to={{
-                      pathname:`/home/${recipe.id}`,
+                      pathname:`/${recipe.id}`,
                       missedIngredientCount:recipe.missedIngredientCount,
                       missedIngredients:recipe.missedIngredients
                     }}
