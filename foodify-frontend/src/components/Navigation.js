@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
 import logo from '../images/logo.png'
 import StarIcon from '../images/star.svg'
 import BellIcon from '../images/bell.svg'
 import UserIcon from '../images/user.svg'
-
+import LogoutIcon from '../images/log-out.svg'
+import styled from 'styled-components'
 import auth from '../services/auth'
 import { useHistory } from 'react-router-dom'
 
+// TODO: Add cursor pointer on hover for navigation
 // CSS
 const logoutButton = {
     border: 'none',
@@ -16,23 +18,28 @@ const logoutButton = {
     fontSize: '15px',
     fontWeight: 500,
     color: '#292929',
-    position: 'relative', 
-    top: '13px',
     cursor: 'pointer',
-    outline: 'none', float: 'right', paddingRight: '50px', textDecoration: 'underline'
+    outline: 'none',
+
+
 }
 const modalStyle = {
     overlay: {
         backgroundColor: 'transparent',
-        height: '60px',
-        width: '230px',
-        right: '30px',
-        left: '80%',
+        width: '100%',
         top: '20px',
     },
     content: {
+        overflow: 'visible',
+        padding: 10,
+        height: '25px',
+        width: '130px',
+        right: '40px',
+        left: 'auto',
+        
     }
 }
+Modal.setAppElement('#root')
 
 const Navigation = () => {
     const history = useHistory()
@@ -61,20 +68,40 @@ const Navigation = () => {
                     <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px'}}>Notifications</label>
                 </span>
                 <span style={{padding: '0 15px',}} >
-                    <span onClick={(() => setIsOpen(true))}>
+                    <span onClick={(() => isOpen ? setIsOpen(false) :setIsOpen(true))}> 
                         <img src={UserIcon} alt="User Icon" />
                         <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px'}}>Account</label>
+                           <Modal
+                                isOpen={isOpen}
+                                style={modalStyle}
+                                onRequestClose={(() => setIsOpen(false))}
+                                contentLabel='Account Modal'
+                            >
+                                <button onClick={handleLogout} style={logoutButton}>
+                                    <img src={LogoutIcon} alt='Log out Icon' />
+                                    <span style={{ position: 'relative', top: '-4px', paddingLeft: '17px',}}>Log out</span>
+                                </button>
+                                <ModalArrow />
+                            </Modal>
                     </span>
                 </span>
             </span>
-            {/* <Modal
-                isOpen={isOpen}
-                style={modalStyle}
-            >
-                 <button onClick={handleLogout}>log out</button>
-            </Modal> */}
+         
         </nav>
     )
 }
+
+const ModalArrow = styled.div`
+    content: '';
+    height: 7px;
+    width: 7px;
+    position: absolute;
+    background-color: white;
+    top: -5px;
+    left: 45%;
+    border-top: lightgray solid 1px;
+    border-left: lightgray solid 1px;
+    transform: rotate(45deg);
+`
 
 export default Navigation
