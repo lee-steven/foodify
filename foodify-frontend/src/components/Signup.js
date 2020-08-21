@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import foodifyLogo from '../images/logo.png'
-import userService from '../services/users'
-import auth from '../services/auth'
 import Loader from 'react-loader-spinner'
-
-
 import {
     BackgroundContainer,
     Container,
@@ -18,45 +14,16 @@ import {
     HeadingContainer
 } from '../constants/styled.js'
 
-const Signup = () => {
-    const [ name, setName ] = useState('')
-    const [ email, setEmail ] = useState('')
-    const [ password, setPassword ] = useState('')
-    // const [ user, setUser ] = useState(null)
-    const [ message, setMessage ] = useState(' ')
-    const [ isAuthing, setIsAuthing ] = useState(false)
-    const history = useHistory()
-
-    const handleSignup = async (event) => {
-        event.preventDefault()
-        const nameArr = name.split(' ')
-        const firstName = nameArr[0]
-        const lastName = nameArr[1]
-        try{
-            setIsAuthing(true)
-            const newUser = await userService.createUser({
-                email, password, firstName, lastName
-            })
-            window.localStorage.setItem('loggedFoodifyUser', JSON.stringify(newUser))
-            auth.login(newUser.id)
-
-            setTimeout(() => {
-                setIsAuthing(false)
-                setName('')
-                setEmail('')
-                setPassword('')
-                history.push('/')
-            }, 1300)
-        } catch(exception){
-            setIsAuthing(false)
-            setMessage('There was an error creating your account')
-            setTimeout(() => {
-                setMessage(' ')
-            }, 5000);
-        }
-
-    }
-
+const Signup = ({
+    name,
+    email,
+    password,
+    message,
+    isAuthing,
+    handleChange,
+    handleSignup
+}) => {
+   
     return (
         <BackgroundContainer>
         <Container>
@@ -74,15 +41,33 @@ const Signup = () => {
                 <form onSubmit={handleSignup}>
                     <div>
                         <Label>Full Name</Label>
-                        <InputField type='text' value={name} onChange={({target}) => setName(target.value)} placeholder="i.e. Johnny Appleseed"/>
+                        <InputField 
+                            type='text' 
+                            name='name' 
+                            value={name} 
+                            onChange={handleChange} 
+                            placeholder="i.e. Johnny Appleseed"
+                        />
                     </div>
                     <div>
                         <Label>Email</Label>
-                        <InputField type='text' value={email} onChange={({target}) => setEmail(target.value)} placeholder="Enter your email..."/>
+                        <InputField 
+                            type='text' 
+                            name='email' 
+                            value={email} 
+                            onChange={handleChange} 
+                            placeholder="Enter your email..."
+                        />
                     </div>
                     <div>
                         <Label>Password</Label>
-                        <InputField type='password' value={password} onChange={({target}) => setPassword(target.value)} placeholder="Enter your password..."/>
+                        <InputField 
+                            type='password' 
+                            name='password' 
+                            value={password} 
+                            onChange={handleChange} 
+                            placeholder="Enter your password..."
+                        />
                     </div>
                     
                     <Button type='submit'>
@@ -94,11 +79,11 @@ const Signup = () => {
                 </form>
 
                 <div style={{marginTop: '10px', fontSize: '15px'}}>
-                <label>Already have an account? </label>
-                <Link to='/login'>
-                    <RedirectLink>Log in</RedirectLink>
-                </Link>
-            </div>
+                    <label>Already have an account? </label>
+                    <Link to='/login'>
+                        <RedirectLink>Log in</RedirectLink>
+                    </Link>
+                </div>
 
             </FormContainer>
         </Container>

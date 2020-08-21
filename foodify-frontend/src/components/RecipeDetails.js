@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Navigation from './Navigation'
+import Header from './Header'
 import ReactHtmlParser from 'react-html-parser'
 import { trackPromise } from 'react-promise-tracker'
 import LoadingIndicator from './LoadingIndicator';
@@ -64,7 +64,7 @@ const RecipeDetails = (props) => {
 
     return (
         <div style={{height: '100%'}}>
-            <Navigation />
+            <Header />
             <div style={container}>
                 <div style={{textAlign: 'center'}}>
                     <LoadingIndicator />

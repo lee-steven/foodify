@@ -41,7 +41,7 @@ const modalStyle = {
 }
 Modal.setAppElement('#root')
 
-const Navigation = () => {
+const Header = () => {
     const history = useHistory()
     const [ isOpen, setIsOpen ] = useState(false)
 
@@ -70,7 +70,7 @@ const Navigation = () => {
                 <span style={{padding: '0 15px',}} >
                     <span onClick={(() => isOpen ? setIsOpen(false) :setIsOpen(true))}> 
                         <img src={UserIcon} alt="User Icon" />
-                        <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px'}}>Account</label>
+                        <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px', zIndex:-1}}>Account</label>
                            <Modal
                                 isOpen={isOpen}
                                 style={modalStyle}
@@ -79,7 +79,7 @@ const Navigation = () => {
                             >
                                 <button onClick={handleLogout} style={logoutButton}>
                                     <img src={LogoutIcon} alt='Log out Icon' />
-                                    <span style={{ position: 'relative', top: '-4px', paddingLeft: '17px',}}>Log out</span>
+                                    <span style={{ position: 'relative', top: '-4px', paddingLeft: '17px'}}>Log out</span>
                                 </button>
                                 <ModalArrow />
                             </Modal>
@@ -104,4 +104,4 @@ const ModalArrow = styled.div`
     transform: rotate(45deg);
 `
 
-export default Navigation
+export default Header

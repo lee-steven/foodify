@@ -8,7 +8,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { trackPromise } from 'react-promise-tracker'
 
 
-import Navigation from './Navigation'
+import Header from './Header'
 import MyGroceries from './MyGroceries'
 import Recipes from './Recipes'
 
@@ -179,7 +179,7 @@ const Home = (props) => {
   return (
     <div style={{height: '100%', overflow: 'hidden'}}>
    
-        <Navigation />
+        <Header />
         <div id="myModal" className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeButton}>&times;</span>
