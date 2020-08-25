@@ -9,7 +9,6 @@ import styled from 'styled-components'
 import auth from '../services/auth'
 import { useHistory } from 'react-router-dom'
 
-// TODO: Add cursor pointer on hover for navigation
 // CSS
 const logoutButton = {
     border: 'none',
@@ -31,12 +30,11 @@ const modalStyle = {
     },
     content: {
         overflow: 'visible',
-        padding: 10,
+        padding: '10px 0px 8px 30px',
         height: '25px',
-        width: '130px',
+        width: '140px',
         right: '40px',
         left: 'auto',
-        
     }
 }
 Modal.setAppElement('#root')
@@ -68,7 +66,7 @@ const Header = () => {
                     <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px'}}>Notifications</label>
                 </span>
                 <span style={{padding: '0 15px',}} >
-                    <span onClick={(() => isOpen ? setIsOpen(false) :setIsOpen(true))}> 
+                    <NavButton onClick={(() => isOpen ? setIsOpen(false) :setIsOpen(true))}> 
                         <img src={UserIcon} alt="User Icon" />
                         <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px', zIndex:-1}}>Account</label>
                            <Modal
@@ -83,13 +81,16 @@ const Header = () => {
                                 </button>
                                 <ModalArrow />
                             </Modal>
-                    </span>
+                    </NavButton>
                 </span>
             </span>
          
         </nav>
     )
 }
+const NavButton = styled.span`
+    cursor: pointer;
+`
 
 const ModalArrow = styled.div`
     content: '';
