@@ -8,14 +8,8 @@ Foodify will help users organize their groceries/pantry by notifying users when 
 As a college student who was transitioning to living off-campus and learning to grocery shop, meal prep, and cook myself, I found that I would often end up not using a lot of the groceries I bought as they would either expire or I would forget about them.
 
 
-## Screenshots
-<!-- ![Welcome Page](/images/welcome.png)
-![Login](/images/login.png)
-![Home](/images/home.png)
-![Home](/images/home2.png)
-![Recipe Details](/images/recipe.png) -->
-![Login](/images/loginScreenshot.png)
-![Signup](/images/signupScreenshot.png)
+## Wireframe
+[Figma](https://www.figma.com/file/2yTevZ7Usra6yZbZGP08Ad/foodify)
 
 
 

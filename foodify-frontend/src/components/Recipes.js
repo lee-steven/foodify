@@ -15,28 +15,29 @@ const container = {
   marginRight: '10px',
   maxHeight: '100%',
   overflow: 'scroll',
-  borderBottom: '1px solid #E0E0E0',
 }
 
 
 const Recipes = ({recipes}) => {
     return (
         <div style={container}   className='scrollable'>
-          <h2 style={heading}>Recipes</h2>
+          <h2 style={heading}>Recipe Ideas</h2>
               <LoadingIndicator />
               {recipes.map(recipe => {
               return (
-                <div key={recipe.id} style={{width: '80%', height: '230px', paddingBottom: '5px'}} >
-                  <Link                
-                    to={{
-                      pathname:`/${recipe.id}`,
-                      missedIngredientCount:recipe.missedIngredientCount,
-                      missedIngredients:recipe.missedIngredients
-                    }}
-                  >
-                    <img src={recipe.image} alt={recipe.title}  id={recipe.id} style={{width: '120%', maxWidth: '306px',  filter: 'brightness(70%)', borderRadius: '10px'}}/>
-                  </Link>
-                  <h4 style={{width: '80%', overflowWrap: 'break-word', position: 'relative', top: '-80px', left: '10px', color: 'white', fontSize: '20px'}}>{recipe.title}</h4>
+                <div key={recipe.id} style={{display: 'inline-block', maxHeight: '305px', paddingBottom: '5px', marginRight: '27px', paddingBottom: '25px'}} >
+                  <div>
+                    <Link                
+                      to={{
+                        pathname:`/${recipe.id}`,
+                        missedIngredientCount:recipe.missedIngredientCount,
+                        missedIngredients:recipe.missedIngredients
+                      }}
+                    >
+                      <img src={recipe.image} alt={recipe.title}  id={recipe.id} style={{width: '120%', maxWidth: '306px', minWidth: '300px', filter: 'brightness(70%)', borderRadius: '10px'}}/>
+                    </Link> <br/>
+                    <label style={{display: 'block', fontSize: '14px', width: '300px'}}>{recipe.title}</label>
+                  </div>
                 </div>
               )
             })}

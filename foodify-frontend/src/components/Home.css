@@ -18,7 +18,7 @@
     padding: 40px 60px;
     border-style: none;
     border-radius: 10px;
-    width: 35%; /* Could be more or less, depending on screen size */
+    width: 360px; /* Could be more or less, depending on screen size */
   }
   
   /* The Close Button */
