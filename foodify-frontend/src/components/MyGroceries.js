@@ -189,7 +189,7 @@ const GroceryItem = styled.div`
   padding: 13px 0;
 
   @media ${device.mobileS} {
-    grid-template-columns: 4fr 3fr 4fr;
+    grid-template-columns: 4fr 2fr 4fr;
   }
 
   @media ${device.tablet} {

@@ -69,23 +69,18 @@ const Home = (props) => {
       date: date,
     }
 
-    // groceryServices.create(newGroceryItem)
-    
-    setGroceries([...groceries, newGroceryItem])
-
-    // Close Modal and clear input fields
-    document.getElementById('itemName').value = ''
-    document.getElementById('itemQuantity').value = ''
-    document.getElementById('itemDate').value = ''
-    
-    let modal = document.getElementById("myModal");
-    modal.style.display = "none"
-
-
-    setNewMessage('Grocery Item has successfully been added')
-    setInterval(() => {
-      setNewMessage('')
-    }, 3000)
+    groceryServices.create(newGroceryItem)
+    .then(() => {
+      setGroceries([...groceries, newGroceryItem])
+      
+      // Close Modal and clear input fields
+      document.getElementById('itemName').value = ''
+      document.getElementById('itemQuantity').value = ''
+      document.getElementById('itemDate').value = ''
+      
+      let modal = document.getElementById("myModal");
+      modal.style.display = "none"
+    })
   }
 
   // Handles submit for selected grocery items to search for recipes
@@ -152,7 +147,7 @@ const Home = (props) => {
             <Close onClick={closeButton}>&times;</Close>
             <ModalContentMobile>
             <h2>Add Grocery Item</h2>
-
+            <p style={{color: 'red', fontWeight: '500', fontSize: '14px', height: '14px', marginBottom: 0}}>{message}</p>
             <form onSubmit={handleAddSubmit} style ={{paddingTop: '20px'}}>
               <InputDiv>
                 <label style={fieldLabel}>Grocery Item </label><br />
