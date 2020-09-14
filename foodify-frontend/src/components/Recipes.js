@@ -25,7 +25,7 @@ const Recipes = ({recipes}) => {
               <LoadingIndicator />
               {recipes.map(recipe => {
               return (
-                <div key={recipe.id} style={{display: 'inline-block', paddingBottom: '5px', marginRight: '27px', paddingBottom: '25px'}} >
+                <div key={recipe.id} style={{display: 'inline-block', marginRight: '27px', paddingBottom: '25px'}} >
                   <div>
                     <Link                
                       to={{
