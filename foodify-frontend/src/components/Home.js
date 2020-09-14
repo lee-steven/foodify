@@ -10,28 +10,14 @@ import Header from './Header'
 import Navigation from './Navigation'
 import MyGroceries from './MyGroceries'
 import Recipes from './Recipes'
-
-import './Home.css'
+import { device } from '../constants/styled'
 
 // CSS
-const container = {
-  display: 'grid',
-  gridTemplateColumns: '300px auto',
-  height: '92%',
-  marginTop: 0,
-  paddingTop: 0,
-}
-
 const fieldLabel = {
   color: 'gray',
   fontWeight: 500,
   fontSize: '14px',
 }
-
-const cancelButton = {
-
-}
-
 
 const Home = (props) => {
   const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
@@ -161,9 +147,10 @@ const Home = (props) => {
     <div style={{height: '100%', overflow: 'hidden'}}>
    
         <Header />
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeButton}>&times;</span>
+        <Modal id="myModal">
+          <ModalContent>
+            <Close onClick={closeButton}>&times;</Close>
+            <ModalContentMobile>
             <h2>Add Grocery Item</h2>
 
             <form onSubmit={handleAddSubmit} style ={{paddingTop: '20px'}}>
@@ -189,28 +176,105 @@ const Home = (props) => {
                 <AddItemButton type='submit' value='Add Grocery Item'/>
               </div>
             </form>
-          </div>
-        </div>
+            </ModalContentMobile>
+          </ModalContent>
+        </Modal>
 
-        <div id="recipesModal" class="modal">
-          <div class="modal-content" style={{width: '75%', height: '70%', marginTop: '83px'}}>
-            <span class="close" onClick={closeButton}>&times;</span>
+        <Modal id="recipesModal">
+          <RecipesModalContent>
+            <Close style={{position: 'relative', right: '20px', top: '20px'}} onClick={closeButton}>&times;</Close>
             <Recipes recipes={recipes}/>
-          </div>
-        </div>
+          </RecipesModalContent>
+        </Modal>
 
 
-        <div style={container}>
-          {/* <MyGroceries groceries={groceries} handleSubmit={handleSubmit} modalButtonClick={modalButtonClick}/>
-          <Recipes recipes={recipes} /> */}
+        <Container>
           <Navigation/>
           <MyGroceries groceries={groceries} handleSubmit={handleSubmit} modalButtonClick={modalButtonClick}/>
-        </div>
-        
-        {/* TODO ADD MESSAGE VARIABLE */}
-    </div>
+        </Container>
+      </div>
   )
 }
+
+const Modal = styled.div`
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: none; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+`
+
+const ModalContent = styled.div`
+  background-color: #fefefe;
+
+  @media ${device.mobileS} {
+    border: none;
+    margin: 0;
+    height: 100%;
+    padding: 40px;
+  }
+
+  @media ${device.tablet} {
+    width: 360px; /* Could be more or less, depending on screen size */
+    border-style: none;
+    border-radius: 10px;
+    margin: 12% auto; /* 15% from the top and centered */
+    padding: 40px 60px;
+    height: auto;
+  }
+`
+
+const Close = styled.span`
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  &:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  &:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+`
+
+const ModalContentMobile = styled.div`
+  @media ${device.mobileS} {
+    margin-top: 30%;
+  }
+
+  @media ${device.tablet} {
+    margin-top: 0;
+  }
+`
+
+const RecipesModalContent = styled.div`
+  background-color: #fefefe;
+
+  @media ${device.mobileS} {
+    width: auto;
+    height: 100%;
+    margin-top: 0;
+  }
+
+  @media ${device.tablet} {
+    border-style: none;
+    border-radius: 10px;
+    padding: 40px 60px;
+    width: 75%;
+    height: 70%;
+    margin: 83px auto;
+  }
+`
 
 const InputDiv = styled.div`
   margin-bottom: 13px;
@@ -229,8 +293,8 @@ const Input = styled.input`
 
 const CancelButton = styled.button`
   border-style: none;
-  padding: 10px 30px;
-  margin: 15px 10px 5px 0px;
+  padding: 10px 20px;
+  margin: 15px 5px 5px 0px;
   font-size: 14px;
   outline: none;
   cursor: pointer;
@@ -244,7 +308,7 @@ const AddItemButton = styled.input`
   border: 1px solid #39B54A;
   border-radius: 5px;
   background-color: #39B54A;
-  padding: 10px 50px;
+  padding: 10px 40px;
   margin: 15px 0px 5px 10px;
   font-size: 14px;
   color: white;
@@ -253,6 +317,20 @@ const AddItemButton = styled.input`
   font-family: degular, Helvetica, Arial, sans-serif;
   font-weight: 600;
 `
+const Container = styled.div`
+  height: 92%;
+  margin-top: 0;
+  padding-top: 0;
+  width: 100%;
 
+  @media ${device.mobileS} {
+    display: block;
+  }
+
+  @media ${device.tablet} {
+      display: grid;
+      grid-template-columns: 300px auto;
+  }
+`
 
 export default Home;

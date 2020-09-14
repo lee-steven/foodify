@@ -12,20 +12,20 @@ const heading = {
 }
 const container = {
   padding: '0 30px 0px 30px',
-  marginRight: '10px',
   maxHeight: '100%',
   overflow: 'scroll',
+  margin: '0 auto',
 }
 
 
 const Recipes = ({recipes}) => {
     return (
-        <div style={container}   className='scrollable'>
+        <div style={container}>
           <h2 style={heading}>Recipe Ideas</h2>
               <LoadingIndicator />
               {recipes.map(recipe => {
               return (
-                <div key={recipe.id} style={{display: 'inline-block', maxHeight: '305px', paddingBottom: '5px', marginRight: '27px', paddingBottom: '25px'}} >
+                <div key={recipe.id} style={{display: 'inline-block', paddingBottom: '5px', marginRight: '27px', paddingBottom: '25px'}} >
                   <div>
                     <Link                
                       to={{
@@ -36,7 +36,7 @@ const Recipes = ({recipes}) => {
                     >
                       <img src={recipe.image} alt={recipe.title}  id={recipe.id} style={{width: '120%', maxWidth: '306px', minWidth: '300px', filter: 'brightness(70%)', borderRadius: '10px'}}/>
                     </Link> <br/>
-                    <label style={{display: 'block', fontSize: '14px', width: '300px'}}>{recipe.title}</label>
+                    <label style={{display: 'inline-block', color: 'white', fontSize: '17px', fontWeight: '700', width: '280px', height: '20px', overflow: 'hidden', position: 'relative', top: '-40px', left: '15px'}}>{recipe.title}</label>
                   </div>
                 </div>
               )

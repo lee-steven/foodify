@@ -1,11 +1,26 @@
 import React from 'react'
+import styled from 'styled-components'
+import { device } from '../constants/styled'
 
 const Navigation = () => {
     return (
-        <div style={{backgroundColor: '#F6F6F6'}}>
+        <NavigationContainer>
             All Groceries
-        </div>
+        </NavigationContainer>
     )
 }
+
+const NavigationContainer = styled.div`
+    background-color: #F6F6F6;
+    
+    @media ${device.mobileS} {
+        display: none;
+    }
+
+    @media ${device.tablet} {
+        display: block;
+    }
+`
+
 
 export default Navigation;

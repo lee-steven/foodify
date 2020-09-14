@@ -8,6 +8,8 @@ import LogoutIcon from '../images/log-out.svg'
 import styled from 'styled-components'
 import auth from '../services/auth'
 import { useHistory } from 'react-router-dom'
+import { device } from '../constants/styled'
+
 
 // CSS
 const logoutButton = {
@@ -22,6 +24,7 @@ const logoutButton = {
 
 
 }
+
 const modalStyle = {
     overlay: {
         backgroundColor: 'transparent',
@@ -37,6 +40,7 @@ const modalStyle = {
         left: 'auto',
     }
 }
+
 Modal.setAppElement('#root')
 
 const Header = () => {
@@ -56,7 +60,8 @@ const Header = () => {
                 <img src={logo} alt='foodify Logo' height='40px' style={{ display: 'inline-block', paddingRight: '15px'}}/>
                 <h3 style={{ fontSize: '24px', color: '#292929', display: 'inline-block', position: 'relative', top: '-10px' }}>foodify</h3>
             </span>
-            <span style={{ float: 'right', paddingRight: '70px', position: 'relative', top: '22px'}}>
+
+            <HeaderButtons>
                 <span style={{padding: '0 15px',}}>
                     <img src={StarIcon} alt="Star Icon" />
                     <label style={{position: 'relative', top: '-4px', paddingLeft: '5px', fontWeight: 500, fontSize: '15px'}}>Favorites</label>
@@ -83,11 +88,26 @@ const Header = () => {
                             </Modal>
                     </NavButton>
                 </span>
-            </span>
+            </HeaderButtons>
          
         </nav>
     )
 }
+
+const HeaderButtons = styled.span`
+    @media ${device.mobileS} {
+        display: none;
+    }
+
+    @media ${device.tablet} {
+        display: inline-block;
+        float: right;
+        padding-right: 70px;
+        position: relative;
+        top: 22px;
+    }
+`
+
 const NavButton = styled.span`
     cursor: pointer;
 `
