@@ -5,6 +5,7 @@ import StarIcon from '../images/star.svg'
 import BellIcon from '../images/bell.svg'
 import UserIcon from '../images/user.svg'
 import LogoutIcon from '../images/log-out.svg'
+import MenuIcon from '../images/menu.svg'
 import styled from 'styled-components'
 import auth from '../services/auth'
 import { useHistory } from 'react-router-dom'
@@ -21,8 +22,6 @@ const logoutButton = {
     color: '#292929',
     cursor: 'pointer',
     outline: 'none',
-
-
 }
 
 const modalStyle = {
@@ -52,6 +51,11 @@ const Header = () => {
         auth.logout()
         history.push('login')
     }
+
+    // const openHamburgerMenu = () => {
+    //     let modal = document.getElementById('myModal')
+    //     modal.style.display = 'block'
+    // }
 
     return(
         <nav style={{height: '5%', margin: 0, padding: '10px 0 30px 0', borderBottom: '1px solid #E0E0E0'}}>
@@ -89,7 +93,26 @@ const Header = () => {
                     </NavButton>
                 </span>
             </HeaderButtons>
+
+            <HamburgerMenuContainer>
+                <img src={MenuIcon} alt='Hamburger Menu Icon' />
+            </HamburgerMenuContainer>
          
+            {/* <div id="myModal" class="modal">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Modal Header</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the Modal Body</p>
+                    <p>Some other text...</p>
+                </div>
+                <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                </div>
+                </div>
+            </div> */}
         </nav>
     )
 }
@@ -123,6 +146,18 @@ const ModalArrow = styled.div`
     border-top: lightgray solid 1px;
     border-left: lightgray solid 1px;
     transform: rotate(45deg);
+`
+
+const HamburgerMenuContainer = styled.span`
+    @media ${device.mobileS} {
+        display: inline-block;
+        float: right;
+        padding: 17px 30px;
+    }
+
+    @media ${device.tablet} {
+        display: none;
+    }
 `
 
 export default Header
