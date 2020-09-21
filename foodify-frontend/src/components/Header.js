@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import auth from '../services/auth'
 import { useHistory } from 'react-router-dom'
 import { device } from '../constants/styled'
+import './Header.css'
 
 
 // CSS
@@ -52,10 +53,15 @@ const Header = () => {
         history.push('login')
     }
 
-    // const openHamburgerMenu = () => {
-    //     let modal = document.getElementById('myModal')
-    //     modal.style.display = 'block'
-    // }
+    const openHamburgerMenu = () => {
+        let modal = document.getElementById('myModal')
+        modal.style.display = 'block'
+    }
+
+    const handleCloseHamburger = () => {
+        let modal = document.getElementById('myModal')
+        modal.style.display = "none";
+    }
 
     return(
         <nav style={{height: '5%', margin: 0, padding: '10px 0 30px 0', borderBottom: '1px solid #E0E0E0'}}>
@@ -95,24 +101,24 @@ const Header = () => {
             </HeaderButtons>
 
             <HamburgerMenuContainer>
-                <img src={MenuIcon} alt='Hamburger Menu Icon' />
+                <img src={MenuIcon} alt='Hamburger Menu Icon' onClick={openHamburgerMenu}/>
             </HamburgerMenuContainer>
          
-            {/* <div id="myModal" class="modal">
+            <div id="myModal" class="modal">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Modal Header</h2>
+                    <div class="modal-header">
+                        <span class="close" onClick={handleCloseHamburger}>&times;</span>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <button onClick={handleLogout} style={logoutButton}>
+                            <img src={LogoutIcon} alt='Log out Icon' />
+                            <span style={{ position: 'relative', top: '-4px', paddingLeft: '17px'}}>Log out</span>
+                        </button>
+                    </div>
+       
                 </div>
-                <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
-                </div>
-                <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                </div>
-                </div>
-            </div> */}
+            </div>
         </nav>
     )
 }
