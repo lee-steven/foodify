@@ -10,10 +10,11 @@ Foodify will help users organize their groceries/pantry by notifying users when 
 ## Motivation
 As a college student who was transitioning to living off-campus and learning to grocery shop, meal prep, and cook myself, I found that I would often end up not using a lot of the groceries I bought as they would either expire or I would forget about them.
 
-
 ## Wireframe
 [Figma](https://www.figma.com/file/2yTevZ7Usra6yZbZGP08Ad/foodify)
 
+## TODO
+[Trello](https://trello.com/b/1tguScW0/foodify)
 
 ## Tech/Frameworks Used
 [React](https://reactjs.org/) <br>

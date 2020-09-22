@@ -47,7 +47,6 @@ const RecipeDetails = (props) => {
         trackPromise(
             axios.get(`https://api.spoonacular.com/recipes/${props.match.params.id}/information?apiKey=${API_KEY}`)
             .then(response => {
-            console.log(response.data)
             setRecipeInfo(response.data)
             })  
         )

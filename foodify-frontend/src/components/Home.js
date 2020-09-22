@@ -40,13 +40,6 @@ const Home = (props) => {
     })
   }, [])
 
-  useEffect(() => {
-    if(location.state){
-      console.log(location.state.user)
-    }
- 
-  }, [location])
-
   // Handles adding Grocery Item
   const handleAddSubmit = (event) => {
     event.preventDefault()

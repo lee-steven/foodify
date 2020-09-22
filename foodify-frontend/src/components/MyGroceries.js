@@ -47,6 +47,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
         groceryList[i].checked = false;
       }
     }
+    handleInputChecked()
   }
 
   return (
