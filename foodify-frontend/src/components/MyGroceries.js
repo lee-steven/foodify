@@ -35,6 +35,20 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
       : setToggleButton('Add New Grocery Item')
   }
 
+  const handleAllInputChecked = e => {
+    const groceryList = document.getElementsByClassName('grocery')
+
+    if(e.target.checked){
+      for(let i = 0; i < groceryList.length; i++) {
+        groceryList[i].checked = true;
+      }
+    } else {
+      for(let i = 0; i < groceryList.length; i++) {
+        groceryList[i].checked = false;
+      }
+    }
+  }
+
   return (
     <Container>
       <div>
@@ -51,7 +65,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
       </div>
 
       <Categories>
-        <span style={{paddingLeft: '12px'}}><input type="checkbox" value=""/></span>
+        <span style={{paddingLeft: '12px'}}><input type="checkbox" value="" onChange={handleAllInputChecked}/></span>
         <span>Grocery Item</span>
         <span>Quantity</span>
         <span>Purchase Date</span>

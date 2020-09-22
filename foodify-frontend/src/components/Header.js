@@ -47,6 +47,10 @@ const Header = () => {
     const history = useHistory()
     const [ isOpen, setIsOpen ] = useState(false)
 
+    const handleLogoClick = () => {
+        history.push('/')
+    }
+
     const handleLogout = () => {
         window.localStorage.removeItem('loggedFoodifyUser')
         auth.logout()
@@ -54,22 +58,22 @@ const Header = () => {
     }
 
     const openHamburgerMenu = () => {
-        let modal = document.getElementById('myModal')
+        let modal = document.getElementById('myHamburgerModal')
         modal.style.display = 'block'
     }
 
     const handleCloseHamburger = () => {
-        let modal = document.getElementById('myModal')
+        let modal = document.getElementById('myHamburgerModal')
         modal.style.display = "none";
     }
 
     return(
         <nav style={{height: '5%', margin: 0, padding: '10px 0 30px 0', borderBottom: '1px solid #E0E0E0'}}>
             
-            <span style={{ paddingLeft: '40px', margin: '10px 0'}}>
+            <LogoContainer onClick={handleLogoClick}>
                 <img src={logo} alt='foodify Logo' height='40px' style={{ display: 'inline-block', paddingRight: '15px'}}/>
                 <h3 style={{ fontSize: '24px', color: '#292929', display: 'inline-block', position: 'relative', top: '-10px' }}>foodify</h3>
-            </span>
+            </LogoContainer>
 
             <HeaderButtons>
                 <span style={{padding: '0 15px',}}>
@@ -104,7 +108,7 @@ const Header = () => {
                 <img src={MenuIcon} alt='Hamburger Menu Icon' onClick={openHamburgerMenu}/>
             </HamburgerMenuContainer>
          
-            <div id="myModal" class="modal">
+            <div id="myHamburgerModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close" onClick={handleCloseHamburger}>&times;</span>
@@ -122,6 +126,15 @@ const Header = () => {
         </nav>
     )
 }
+
+const LogoContainer = styled.span`
+    padding-left: 40px;
+    margin: 10px 0;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
 
 const HeaderButtons = styled.span`
     @media ${device.mobileS} {
