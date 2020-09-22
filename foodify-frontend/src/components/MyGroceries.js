@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import trashIcon from '../images/trash.png'
 import searchIcon from '../images/searchIcon.png'
@@ -19,8 +19,31 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
   let groceryIndex = 0;
   
   const [ toggleButton, setToggleButton ] = useState('Add New Grocery Item')
+  const [ filteredGroceries, setFilteredGroceries ] = useState([])
 
-  const handleInputChecked = (e) => {
+  useEffect(() => {
+    setFilteredGroceries(groceries)
+  }, [groceries])
+
+  const onSearchChange = e => {
+    setFilteredGroceries([])
+    if(e.target.value){
+      let searchInput = e.target.value
+      searchInput = searchInput.toLowerCase()
+
+      const filtered = []
+      for(let i = 0; i < groceries.length; i++) {
+        if(groceries[i].name.toLowerCase().includes(searchInput)){
+          filtered.push(groceries[i])
+        }
+      }
+      setFilteredGroceries(filtered)
+    } else {
+      setFilteredGroceries(groceries)
+    }
+  }
+
+  const handleInputChecked = e => {
     const groceryList = document.getElementsByClassName('grocery')
     let checkedIngredients = []
 
@@ -50,6 +73,14 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
     handleInputChecked()
   }
 
+  const shortenGroceryDate = date => {
+    if(date === undefined) return
+    const splitDate = date.split('-')
+    let shortenedDate = ''
+    shortenedDate = shortenedDate.concat(splitDate[1], '/', splitDate[2].substring(0, 2), '/', splitDate[0])
+    return shortenedDate
+  }
+
   return (
     <Container>
       <div>
@@ -58,7 +89,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
 
       <div>
         <SearchInputContainer>
-          <SearchInput type='text' placeholder='Search...' />
+          <SearchInput type='text' placeholder='Search...' onChange={onSearchChange} />
         </SearchInputContainer>
         <ButtonContainer>
           <Button onClick={toggleButton === 'Add New Grocery Item' ? modalButtonClick : handleSubmit}>{toggleButton}</Button>
@@ -74,7 +105,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
       </Categories>
 
       <GroceriesContainer className='scrollable'>
-          {groceries && groceries.map(grocery => {
+          {filteredGroceries && filteredGroceries.map(grocery => {
             return (
               <GroceryItem key={grocery.name} style={groceryIndex++ % 2 === 0 ? whiteBackground : grayBackground}>
                 <div style={{paddingLeft: '12px'}}>
@@ -85,12 +116,12 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
                 </div>
                 
                 <GroceryLabel>{grocery.quantity}</GroceryLabel>
-                <GroceryLabel>09/12/20</GroceryLabel>
-                {/* <span>
+                <GroceryLabel>{shortenGroceryDate(grocery.expiration || grocery.date)}</GroceryLabel>
+                <span>
                   <img src={trashIcon} height='15px' alt='delete' />
-                </span> */}
+                </span>
                 <GroceryLabelMobile></GroceryLabelMobile>
-                <GroceryLabelMobile>Purchase Date: 09/12/20</GroceryLabelMobile>
+                <GroceryLabelMobile>Purchase Date: {grocery.expiration}</GroceryLabelMobile>
               </GroceryItem>
             )
           })}

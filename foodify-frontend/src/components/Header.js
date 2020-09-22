@@ -108,13 +108,13 @@ const Header = () => {
                 <img src={MenuIcon} alt='Hamburger Menu Icon' onClick={openHamburgerMenu}/>
             </HamburgerMenuContainer>
          
-            <div id="myHamburgerModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close" onClick={handleCloseHamburger}>&times;</span>
+            <div id="myHamburgerModal" className="modal">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <span className="close" onClick={handleCloseHamburger}>&times;</span>
                     </div>
                     
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <button onClick={handleLogout} style={logoutButton}>
                             <img src={LogoutIcon} alt='Log out Icon' />
                             <span style={{ position: 'relative', top: '-4px', paddingLeft: '17px'}}>Log out</span>
