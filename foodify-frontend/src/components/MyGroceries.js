@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import trashIcon from '../images/trash.png'
-import searchIcon from '../images/searchIcon.png'
+import SearchIcon from '../images/search.svg'
 import { device } from '../constants/styled'
 
 const whiteBackground = {
@@ -89,6 +89,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
 
       <div>
         <SearchInputContainer>
+          <img src={SearchIcon} alt="Search Icon" style={{position: 'relative', bottom: '-29px', left: '10px'}}/>
           <SearchInput type='text' placeholder='Search...' onChange={onSearchChange} />
         </SearchInputContainer>
         <ButtonContainer>
@@ -117,11 +118,11 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
                 
                 <GroceryLabel>{grocery.quantity}</GroceryLabel>
                 <GroceryLabel>{shortenGroceryDate(grocery.expiration || grocery.date)}</GroceryLabel>
-                <span>
+                {/* <span>
                   <img src={trashIcon} height='15px' alt='delete' />
-                </span>
+                </span> */}
                 <GroceryLabelMobile></GroceryLabelMobile>
-                <GroceryLabelMobile>Purchase Date: {grocery.expiration}</GroceryLabelMobile>
+                <GroceryLabelMobile>Purchase Date: {shortenGroceryDate(grocery.expiration || grocery.date)}</GroceryLabelMobile>
               </GroceryItem>
             )
           })}
@@ -156,7 +157,7 @@ const SearchInputContainer = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 8px 20px;
+  padding: 8px 20px 8px 35px;
   border-radius: 10px;
   border: 1px solid #D6D6D6;
   outline: none;

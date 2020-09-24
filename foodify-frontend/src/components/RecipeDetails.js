@@ -3,44 +3,14 @@ import axios from 'axios'
 import Header from './Header'
 import ReactHtmlParser from 'react-html-parser'
 import { trackPromise } from 'react-promise-tracker'
-import LoadingIndicator from './LoadingIndicator';
-
-// CSS
-const container = {
-    display: 'grid',
-    gridTemplateColumns: '5fr 8fr',
-    height: '92%',
-}
-const diet = {
-    fontSize: '13px',
-    color: '#525252',
-    backgroundColor: 'white',
-    borderRadius: '10px',
-    padding: '8px 18px',
-    marginRight: '20px',
-}
-const styleButton = {
-    fontSize: '14px', 
-    fontWeight: 600, 
-    color: 'white', 
-    border: '1px solid #48AB5F', 
-    borderRadius:'15px', 
-    backgroundColor: '#48AB5F', 
-    width: '180px', 
-    height: '40px', 
-    outline: 'none', 
-    cursor: 'pointer', 
-    margin: '0 0 0 15px',
-    position: 'absolute',
-    bottom: '6%',
-    right: '7%',
-}
+import LoadingIndicator from './LoadingIndicator'
+import styled from 'styled-components'
+import { device } from '../constants/styled'
 
 const RecipeDetails = (props) => {
     const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
     const [ recipeInfo, setRecipeInfo ] = useState([])
 
-    // const missedIngredientCount = props.location.missedIngredientCount
     const missedIngredients = props.location.missedIngredients
 
     useEffect(() => {
@@ -64,21 +34,22 @@ const RecipeDetails = (props) => {
     return (
         <div style={{height: '100%'}}>
             <Header />
-            <div style={container}>
-                <div style={{textAlign: 'center'}}>
+            <Container>
+                <ImageContainer>
                     <LoadingIndicator />
-                    <img src={recipeInfo.image} alt={recipeInfo.title} style={{ width: '80%', borderRadius: '10px', marginTop: '32%' }}/> <br/>
-                </div>
+                    <RecipeImage src={recipeInfo.image} alt={recipeInfo.title}/>
+                </ImageContainer>
 
-                <div style={{ backgroundColor: '#F4F4F4', padding: '100px 10%' }}>
-                    <div style={{marginBottom: '15px'}}>
-                        {dairyFree() && <span style={diet}>dairy free</span>}
-                        {glutenFree() && <span style={diet}>gluten free</span>}
-                        {vegan() && <span style={diet}>vegan</span>}
-                        {vegetarian() && <span style={diet}>vegetarian</span>}
+                <ContentContainer>
+                    <div style={{marginBottom: '15px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+                        {dairyFree() && <DietaryTag>dairy free</DietaryTag>}
+                        {glutenFree() && <DietaryTag>gluten free</DietaryTag>}
+                        {vegan() && <DietaryTag>vegan</DietaryTag>}
+                        {vegetarian() && <DietaryTag>vegetarian</DietaryTag>}
                     </div>
 
                     <h1 style={{fontSize: '40px', margin: '0', padding: '10px 0'}}>{recipeInfo.title}</h1>
+                    <RecipeImageMobile src={recipeInfo.image} alt={recipeInfo.title} />
                     <h5 style={{fontWeight: '600', padding: '0', margin: '0', color: '#363636'}}>by {recipeInfo.sourceName}</h5>
                     <p style={{fontSize: '15px'}}>{ReactHtmlParser(recipeInfo.summary)}</p>
 
@@ -88,12 +59,115 @@ const RecipeDetails = (props) => {
                             return <li key={ingredient.id}>{ingredient.name}</li>
                         })}
                     </ul>
-                    <button onClick={handleRecipeRedirect} style={styleButton}>Go to the recipe</button>
-                </div>
-            
-            </div>
+                    <RecipeButton onClick={handleRecipeRedirect}>Go to the recipe</RecipeButton>
+                </ContentContainer>
+            </Container>
         </div>
     )
 }
+
+const Container = styled.div`
+  @media ${device.mobileS} {
+    display: block;
+    height: 100%;
+  }
+
+  @media ${device.tablet} {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    height: 92%;
+  }
+`
+
+const RecipeImage = styled.img`
+    @media ${device.mobileS} {
+        display: none;
+    }
+
+    @media ${device.tablet} {
+        display: block;
+        border-radius: 10px;
+        width: 80%;
+        margin: 32% auto;
+    }
+`
+const RecipeImageMobile = styled.img`
+    @media ${device.mobileS} {
+        display: block;
+        border-radius: 10px;
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    @media ${device.tablet} {
+        display: none;
+    }
+`
+
+const ImageContainer = styled.div`
+    text-align: center;
+
+    @media ${device.mobileS} {
+        display: none;
+    }
+    
+    @media ${device.tablet} {
+        display: block;
+    }
+`
+
+const ContentContainer = styled.div`
+    background-color: #F4F4F4;
+
+    @media ${device.mobileS} {
+        padding: 20px 10%;
+    }
+    
+    @media ${device.tablet} {
+        padding: 100px 10%;
+    }
+`
+
+const DietaryTag = styled.span`
+    font-size: 13px;
+    color: #525252;
+    background-color: white;
+    border-radius: 10px;
+
+    @media ${device.mobileS} {
+        margin: 5px;
+        padding: 7px 15px;
+    }
+    
+    @media ${device.tablet} {
+        margin-right: 20px;
+        padding: 8px 18px;
+    }
+`
+
+const RecipeButton = styled.button`
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    border: 1px solid #39B54A;
+    border-radius: 15px;
+    background-color: #39B54A;
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    
+    @media ${device.mobileS} {
+        width: 100%; 
+        margin-top: 30px;
+    }
+
+    @media ${device.tablet} {
+        width: 180px;
+        position: absolute; 
+        bottom: 6%;
+        right: 7%;
+        margin: 0 0 0 15px;
+    }
+`
 
 export default RecipeDetails
