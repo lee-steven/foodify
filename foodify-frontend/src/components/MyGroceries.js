@@ -110,7 +110,10 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
             return (
               <GroceryItem key={grocery.name} style={groceryIndex++ % 2 === 0 ? whiteBackground : grayBackground}>
                 <div style={{paddingLeft: '12px'}}>
-                  <input type="checkbox" value={grocery.name} className="grocery" onChange={handleInputChecked}/>
+                  <label>
+                    <StyledInput type="checkbox" value={grocery.name} className="grocery" onChange={handleInputChecked}/>
+                    <StyledCheckbox></StyledCheckbox>
+                  </label>
                   <GroceryLabel style={{paddingLeft: '13%'}}>{grocery.name} </GroceryLabel>
                   <GroceryLabelMobileHeading>{grocery.name}</GroceryLabelMobileHeading>
                   <GroceryLabelMobile style={{paddingLeft: '40px'}}>Quantity: {grocery.quantity}</GroceryLabelMobile>
@@ -229,6 +232,41 @@ const GroceriesContainer = styled.div`
     margin-top: 0;
   }
 `
+const StyledInput = styled.input`
+  // position: absolute;
+  // opacity: 0;
+  // cursor: pointer;
+  // height: 0;
+  // width: 0;
+`
+
+const StyledCheckbox = styled.span`
+  // display: block;
+  // position: relative;
+  // height: 12px; 
+  // width: 12px; 
+  // background-color: white; 
+  // border-radius: 2px;
+  // border: 1px solid lightgray;
+  // cursor: pointer;
+  // @media ${device.mobileS} {
+  //   top: 15px;
+  // }
+
+  // @media ${device.tablet} {
+  //   top: 12px;
+  //   left: 5px;
+
+  //   &:hover {
+  //     background-color: lightgray;
+  //   }
+  // }
+
+  //   &:checked {
+  //     background-color: black;
+  //   }
+
+`
 
 const GroceryItem = styled.div`
   width: 100%;
@@ -236,7 +274,7 @@ const GroceryItem = styled.div`
   padding: 13px 0;
 
   @media ${device.mobileS} {
-    grid-template-columns: 4fr 2fr 4fr;
+    grid-template-columns: 4fr 1.5fr 4fr;
   }
 
   @media ${device.tablet} {
@@ -261,6 +299,7 @@ const GroceryLabelMobileHeading = styled.label`
 
   @media ${device.mobileS} {
     display: inline-block;
+    font-size: 14px;
   }
 
   @media ${device.tablet} {

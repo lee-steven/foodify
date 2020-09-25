@@ -54,7 +54,7 @@ const RecipeDetails = (props) => {
                     <p style={{fontSize: '15px'}}>{ReactHtmlParser(recipeInfo.summary)}</p>
 
                     <h3>Ingredients</h3>
-                    <ul>
+                    <ul style={{height: '120px', overflow: 'scroll'}}>
                         {recipeInfo.extendedIngredients && recipeInfo.extendedIngredients.map(ingredient => {
                             return <li key={ingredient.id}>{ingredient.name}</li>
                         })}
