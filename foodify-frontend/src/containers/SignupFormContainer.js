@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import userService from '../services/users'
+import loginService from '../services/login'
 import auth from '../services/auth'
 import Signup from '../components/Signup'
+import groceryService from '../services/groceries'
 
 const SignupFormContainer = () => {
     const [ name, setName ] = useState('')
@@ -32,8 +34,14 @@ const SignupFormContainer = () => {
             const newUser = await userService.createUser({
                 email, password, firstName, lastName
             })
-            window.localStorage.setItem('loggedFoodifyUser', JSON.stringify(newUser))
-            auth.login(newUser.id)
+
+            const user = await loginService.login({
+                email, password
+            }) // returns token, email, first/last name, id
+            
+            window.localStorage.setItem('loggedFoodifyUser', JSON.stringify(user))
+            auth.login(user.id)
+            groceryService.setToken(user.token)
 
             setTimeout(() => {
                 setIsAuthing(false)

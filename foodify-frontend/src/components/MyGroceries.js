@@ -221,8 +221,7 @@ const Categories = styled.div`
 
 const GroceriesContainer = styled.div`
   overflow: scroll;
-  height: 80%;
-  max-height: 80%;
+  height: 60vh;
 
   @media ${device.mobileS} {
     margin-top: 20px;

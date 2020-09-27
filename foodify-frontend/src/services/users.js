@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/users'
+// Deploy URL
+const baseUrl = '/api/users'
+// const baseUrl = 'http://localhost:3001/api/users'
 
 const getUser = async (id) => {
     const response = await axios.get(`${baseUrl}/${id}`)
@@ -7,7 +9,7 @@ const getUser = async (id) => {
 }
 
 const createUser = async credentials => {
-    const response = await axios.post(`${baseUrl}`, credentials)
+    const response = await axios.post(baseUrl, credentials)
     return response.data
 }
 

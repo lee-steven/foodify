@@ -20,7 +20,9 @@ const fieldLabel = {
 }
 
 const Home = (props) => {
-  const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
+  // Change API key on deploy
+  const API_KEY = '8d92da901d394c2b81d2846d41a5675c'
+  // const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
   const [ message, setNewMessage ] = useState('')
   const [ recipes, setRecipes ] = useState([])
   const [ groceries, setGroceries ] = useState([])

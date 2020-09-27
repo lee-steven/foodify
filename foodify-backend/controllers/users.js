@@ -2,10 +2,10 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const mail = require('../utils/mail')
+const config = require('../utils/config')
 
 // Gets all users from MongoDB
 usersRouter.get('/', async (request, response) => {
-
     const users = await User.find({}).populate('groceries')
     response.json(users.map(u => u.toJSON()))
 })
@@ -21,7 +21,6 @@ usersRouter.get('/:id', (request, response) => {
             }
         })
         .catch(error => {
-            console.log(error)
             response.status(400).send({error: "Erroneous id"})
         })
 })
@@ -47,10 +46,9 @@ usersRouter.post('/', async (request, response) => {
 
     try{
         const savedUser = await user.save()
-
+        // Send email
         const mailObject = mail.createMailOptions(body.email)
         mail.sendMail(mailObject)
-
         response.json(savedUser)
     } catch(error) {
         response.status(400).json({error: 'invalid email'})

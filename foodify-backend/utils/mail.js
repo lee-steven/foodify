@@ -14,7 +14,9 @@ const transporter = nodemailer.createTransport({
 
 transporter.use('compile', hbs({
     viewEngine: 'express-handlebars',
-    viewPath: '../foodify-backend/views/',
+    viewPath: '../views/',
+    // viewPath: '../app/views/',
+    // Change to above path on deploy
 }))
 
 const createMailOptions = (email) => {

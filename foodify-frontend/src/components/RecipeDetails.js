@@ -8,7 +8,9 @@ import styled from 'styled-components'
 import { device } from '../constants/styled'
 
 const RecipeDetails = (props) => {
-    const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
+    // Change API key on deploy
+    const API_KEY = '8d92da901d394c2b81d2846d41a5675c'
+    // const API_KEY = process.env.REACT_APP_SPOONACULAR_API_KEY
     const [ recipeInfo, setRecipeInfo ] = useState([])
 
     const missedIngredients = props.location.missedIngredients

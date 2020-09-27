@@ -14,15 +14,17 @@ const getTokenFrom = request => {
 
 // Gets all groceries from MongoDB
 groceriesRouter.get('/', async (request, response) => {
-
     const groceries = await Grocery.find({}).populate('user', {email: 1, firstName: 1, lastName: 1})
-    
     response.json(groceries.map(grocery => grocery.toJSON()))
 })
 
 groceriesRouter.get('/:id', async (request, response) => {
-    const grocery = await Grocery.findById(request.params.id)
-    response.json(grocery.toJSON())
+    try {
+        const grocery = await Grocery.findById(request.params.id)
+        response.json(grocery.toJSON())
+    } catch(error) {
+        response.status(400).send({error: "Grocery null"})
+    }
 })
 
 // Adding NEW grocery to MongoDB
@@ -30,6 +32,7 @@ groceriesRouter.post('/', async (request, response) => {
     const body = request.body
     const token = getTokenFrom(request)
     const decodedToken = jwt.verify(token, config.SECRET)
+
     if(!token || !decodedToken.id){
         return response.status(401).json({error: 'token missing or invalid'})
     }
