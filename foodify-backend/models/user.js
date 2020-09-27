@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
+userSchema.path('email').validate(function (email) {
+    var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailRegex.test(email)
+ }, 'The e-mail field cannot be empty.')
+
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()

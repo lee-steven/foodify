@@ -14,8 +14,8 @@
     "react-modal": "^3.11.2",
     "react-promise-tracker": "^2.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1"
+    "react-scripts": "^3.4.3",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

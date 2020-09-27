@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const mail = require('../utils/mail')
 
 // Gets all users from MongoDB
 usersRouter.get('/', async (request, response) => {
@@ -44,8 +45,16 @@ usersRouter.post('/', async (request, response) => {
         lastName: body.lastName,
     })
 
-    const savedUser = await user.save()
-    response.json(savedUser)
+    try{
+        const savedUser = await user.save()
+
+        const mailObject = mail.createMailOptions(body.email)
+        mail.sendMail(mailObject)
+
+        response.json(savedUser)
+    } catch(error) {
+        response.status(400).json({error: 'invalid email'})
+    }
 })
 
 module.exports = usersRouter
