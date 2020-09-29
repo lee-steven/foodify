@@ -108,7 +108,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
       <GroceriesContainer className='scrollable'>
           {filteredGroceries && filteredGroceries.map(grocery => {
             return (
-              <GroceryItem key={grocery.name} style={groceryIndex++ % 2 === 0 ? whiteBackground : grayBackground}>
+              <GroceryItem key={grocery.name + grocery.expiration} style={groceryIndex++ % 2 === 0 ? whiteBackground : grayBackground}>
                 <div style={{paddingLeft: '12px'}}>
                   <label>
                     <StyledInput type="checkbox" value={grocery.name} className="grocery" onChange={handleInputChecked}/>
@@ -221,6 +221,7 @@ const Categories = styled.div`
 
 const GroceriesContainer = styled.div`
   overflow: scroll;
+  overflow-x: hidden;
   height: 60vh;
 
   @media ${device.mobileS} {

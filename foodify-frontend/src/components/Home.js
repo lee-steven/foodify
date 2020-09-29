@@ -253,7 +253,8 @@ const RecipesModalContent = styled.div`
   @media ${device.mobileS} {
     width: auto;
     height: 100%;
-    margin-top: 0;
+    margin: 0 auto;
+    text-align:center;
   }
 
   @media ${device.tablet} {
@@ -294,6 +295,7 @@ const CancelButton = styled.button`
 `
 
 const AddItemButton = styled.input`
+  -webkit-appearance: none;
   border-style: none;
   border: 1px solid #39B54A;
   border-radius: 5px;

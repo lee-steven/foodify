@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import styled from 'styled-components'
+import { device } from '../constants/styled'
 import LoadingIndicator from './LoadingIndicator'
 
 // CSS
@@ -15,6 +16,7 @@ const container = {
   maxHeight: '100%',
   overflow: 'scroll',
   margin: '0 auto',
+  overflowX: 'hidden',
 }
 
 
@@ -23,9 +25,10 @@ const Recipes = ({recipes}) => {
         <div style={container}>
           <h2 style={heading}>Recipe Ideas</h2>
               <LoadingIndicator />
+              {/* <RecipesContainer> */}
               {recipes.map(recipe => {
               return (
-                <div key={recipe.id} style={{display: 'inline-block', marginRight: '27px', paddingBottom: '25px'}} >
+                <Recipe key={recipe.id} style={{}} >
                   <div>
                     <Link                
                       to={{
@@ -38,11 +41,25 @@ const Recipes = ({recipes}) => {
                     </Link> <br/>
                     <label style={{display: 'inline-block', color: 'white', fontSize: '17px', fontWeight: '700', width: '280px', height: '20px', overflow: 'hidden', position: 'relative', top: '-40px', left: '15px'}}>{recipe.title}</label>
                   </div>
-                </div>
+                </Recipe>
               )
             })}
+            {/* </RecipesContainer> */}
       </div>
     )
 }
+
+const RecipesContainer = styled.div`
+  margin: 0 auto;
+`
+const Recipe = styled.div`
+  display: inline-block;
+  margin-right: 27px;
+  padding-bottom: 25px; 
+
+  @media ${device.mobileS} {
+    margin: 0 auto;
+  }
+`
 
 export default Recipes

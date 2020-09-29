@@ -34,7 +34,7 @@ const RecipeDetails = (props) => {
     const vegetarian = () => (recipeInfo.vegetarian)
 
     return (
-        <div style={{height: '100%'}}>
+        <OuterContainer>
             <Header />
             <Container>
                 <ImageContainer>
@@ -56,17 +56,28 @@ const RecipeDetails = (props) => {
                     <p style={{fontSize: '15px'}}>{ReactHtmlParser(recipeInfo.summary)}</p>
 
                     <h3>Ingredients</h3>
-                    <ul style={{height: '120px', overflow: 'scroll'}}>
+                    <IngredientsList style={{}}>
                         {recipeInfo.extendedIngredients && recipeInfo.extendedIngredients.map(ingredient => {
                             return <li key={ingredient.id}>{ingredient.name}</li>
                         })}
-                    </ul>
+                    </IngredientsList>
                     <RecipeButton onClick={handleRecipeRedirect}>Go to the recipe</RecipeButton>
                 </ContentContainer>
             </Container>
-        </div>
+        </OuterContainer>
     )
 }
+
+const OuterContainer = styled.div`
+    height: 100%;
+    @media ${device.mobileS} {
+        overflow: scroll;
+    }
+
+    @media ${device.tablet} {
+        overflow: hidden;
+    }
+`
 
 const Container = styled.div`
   @media ${device.mobileS} {
@@ -147,6 +158,19 @@ const DietaryTag = styled.span`
     }
 `
 
+const IngredientsList = styled.ul`
+    @media ${device.mobileS} {
+        height: auto;
+        overflow: visible;
+    }
+
+    @media ${device.tablet} {
+        height: 120px;
+        overflow: scroll;
+        overflow-x: hidden;
+    } 
+`
+
 const RecipeButton = styled.button`
     font-size: 14px;
     font-weight: 600;
@@ -160,6 +184,7 @@ const RecipeButton = styled.button`
     
     @media ${device.mobileS} {
         width: 100%; 
+        height: 50px;
         margin-top: 30px;
     }
 
@@ -169,6 +194,7 @@ const RecipeButton = styled.button`
         bottom: 6%;
         right: 7%;
         margin: 0 0 0 15px;
+        height: 40px;
     }
 `
 
