@@ -1,7 +1,7 @@
 import axios from 'axios'
 // Deploy URL
-const baseUrl = '/api/users'
-// const baseUrl = 'http://localhost:3001/api/users'
+// const baseUrl = '/api/users'
+const baseUrl = 'http://localhost:3001/api/users'
 
 const getUser = async (id) => {
     const response = await axios.get(`${baseUrl}/${id}`)

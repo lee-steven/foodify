@@ -1,7 +1,8 @@
 const axios = require('axios')
 const nodemailer = require('nodemailer')
 
-const baseUrl = 'http://localhost:3001/api/users'
+// const baseUrl = '/api/users'
+const baseUrl = 'https://murmuring-harbor-82413.herokuapp.com/api/users'
 
 const transporter = nodemailer.createTransport({
     host: 'smtp-mail.outlook.com',
@@ -13,15 +14,6 @@ const transporter = nodemailer.createTransport({
         pass: 'F00disGr8!'
     }
 })
-
-// const createMailOptions = email => {
-//     return {
-//         from: 'foodify.automated@outlook.com',
-//         to: email,
-//         subject: 'foodify notification',
-//         text: 'Some of your groceries are getting old!'
-//     }
-// }
 
 const createMailOptions = (groceries, email) => {
     const parsedGroceries = []

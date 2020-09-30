@@ -1,7 +1,7 @@
 import axios from 'axios'
 // Deploy URL
-const baseUrl = '/api/groceries'
-// const baseUrl = 'http://localhost:3001/api/groceries'
+// const baseUrl = '/api/groceries'
+const baseUrl = 'http://localhost:3001/api/groceries'
 
 let token = null
 

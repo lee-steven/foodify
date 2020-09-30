@@ -11,6 +11,7 @@ import Navigation from './Navigation'
 import MyGroceries from './MyGroceries'
 import Recipes from './Recipes'
 import { device } from '../constants/styled'
+import { useCheckboxState } from 'pretty-checkbox-react'
 
 // CSS
 const fieldLabel = {
@@ -26,6 +27,7 @@ const Home = (props) => {
   const [ message, setNewMessage ] = useState('')
   const [ recipes, setRecipes ] = useState([])
   const [ groceries, setGroceries ] = useState([])
+  const checkbox = useCheckboxState({ state: [] })
   const location = useLocation()
   const history = useHistory()
 
@@ -84,19 +86,9 @@ const Home = (props) => {
     let modal = document.getElementById("recipesModal");
     modal.style.display = "block";
 
-    const groceryList = document.getElementsByClassName('grocery')
-    let checkedIngredients = []
-
-    // Stores checked ingredients in checkedIngredients array
-    for(let i = 0; i < groceryList.length; i++){
-      if(groceryList[i].checked){
-        checkedIngredients = checkedIngredients.concat(groceryList[i].value)
-      }
-    }
-
     // Retrieves recipes from API based on selected ingredients
     trackPromise(
-      axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${checkedIngredients.map(ingredient => `${ingredient},+`)}&number=15&apiKey=${API_KEY}`)
+      axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${checkbox.state.map(ingredient => `${ingredient},+`)}&number=15&apiKey=${API_KEY}`)
         .then(response => {
           setRecipes(response.data)
       })
@@ -180,7 +172,7 @@ const Home = (props) => {
 
         <Container>
           <Navigation/>
-          <MyGroceries groceries={groceries} handleSubmit={handleSubmit} modalButtonClick={modalButtonClick}/>
+          <MyGroceries groceries={groceries} checkbox={checkbox} handleSubmit={handleSubmit} modalButtonClick={modalButtonClick}/>
         </Container>
       </div>
   )

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { device } from '../constants/styled'
 import LoadingIndicator from './LoadingIndicator'
 
 // CSS
@@ -25,7 +24,6 @@ const Recipes = ({recipes}) => {
         <div style={container}>
           <h2 style={heading}>Recipe Ideas</h2>
               <LoadingIndicator />
-              {/* <RecipesContainer> */}
               {recipes.map(recipe => {
               return (
                 <Recipe key={recipe.id} style={{}} >
@@ -44,22 +42,15 @@ const Recipes = ({recipes}) => {
                 </Recipe>
               )
             })}
-            {/* </RecipesContainer> */}
       </div>
     )
 }
 
-const RecipesContainer = styled.div`
-  margin: 0 auto;
-`
 const Recipe = styled.div`
   display: inline-block;
   margin-right: 27px;
   padding-bottom: 25px; 
-
-  @media ${device.mobileS} {
-    margin: 0 auto;
-  }
+  margin: 0 8px;
 `
 
 export default Recipes

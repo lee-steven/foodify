@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import trashIcon from '../images/trash.png'
 import SearchIcon from '../images/search.svg'
 import { device } from '../constants/styled'
+import { Checkbox, useCheckboxState } from 'pretty-checkbox-react'
+
+import '@djthoms/pretty-checkbox';
+
 
 const whiteBackground = {
   backgroundColor: 'white',
@@ -14,7 +19,7 @@ const grayBackground = {
   borderRadius: '5px',
 }
 
-const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
+const MyGroceries = ({groceries, checkbox, handleSubmit, modalButtonClick}) => {
 
   let groceryIndex = 0;
   
@@ -23,7 +28,8 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
 
   useEffect(() => {
     setFilteredGroceries(groceries)
-  }, [groceries])
+    handleInputChecked()
+  }, [groceries, checkbox])
 
   const onSearchChange = e => {
     setFilteredGroceries([])
@@ -43,34 +49,14 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
     }
   }
 
-  const handleInputChecked = e => {
-    const groceryList = document.getElementsByClassName('grocery')
-    let checkedIngredients = []
-
-    for(let i = 0; i < groceryList.length; i++){
-      if(groceryList[i].checked){
-        checkedIngredients = checkedIngredients.concat(groceryList[i].value)
-      }
-    }
-
-    checkedIngredients.length > 0
+  const handleInputChecked = () => {
+    checkbox.state.length > 0
       ? setToggleButton('Search for Recipes')
       : setToggleButton('Add New Grocery Item')
   }
 
-  const handleAllInputChecked = e => {
-    const groceryList = document.getElementsByClassName('grocery')
+  const handleAllInputChecked = (e) => {
 
-    if(e.target.checked){
-      for(let i = 0; i < groceryList.length; i++) {
-        groceryList[i].checked = true;
-      }
-    } else {
-      for(let i = 0; i < groceryList.length; i++) {
-        groceryList[i].checked = false;
-      }
-    }
-    handleInputChecked()
   }
 
   const shortenGroceryDate = date => {
@@ -98,7 +84,7 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
       </div>
 
       <Categories>
-        <span style={{paddingLeft: '12px'}}><input type="checkbox" value="" onChange={handleAllInputChecked}/></span>
+        <span style={{paddingLeft: '12px'}}><Checkbox color="success" shape="curve" animation="smooth" value='Select-All' {...checkbox} bigger></Checkbox></span>
         <span>Grocery Item</span>
         <span>Quantity</span>
         <span>Purchase Date</span>
@@ -111,12 +97,11 @@ const MyGroceries = ({groceries, handleSubmit, modalButtonClick}) => {
               <GroceryItem key={grocery.name + grocery.expiration} style={groceryIndex++ % 2 === 0 ? whiteBackground : grayBackground}>
                 <div style={{paddingLeft: '12px'}}>
                   <label>
-                    <StyledInput type="checkbox" value={grocery.name} className="grocery" onChange={handleInputChecked}/>
-                    <StyledCheckbox></StyledCheckbox>
+                    <Checkbox color="success" shape="curve" animation="smooth" value={grocery.name} {...checkbox}></Checkbox>
                   </label>
                   <GroceryLabel style={{paddingLeft: '13%'}}>{grocery.name} </GroceryLabel>
                   <GroceryLabelMobileHeading>{grocery.name}</GroceryLabelMobileHeading>
-                  <GroceryLabelMobile style={{paddingLeft: '40px'}}>Quantity: {grocery.quantity}</GroceryLabelMobile>
+                  <GroceryLabelMobile style={{paddingLeft: '34px'}}>Quantity: {grocery.quantity}</GroceryLabelMobile>
                 </div>
                 
                 <GroceryLabel>{grocery.quantity}</GroceryLabel>
@@ -232,41 +217,6 @@ const GroceriesContainer = styled.div`
     margin-top: 0;
   }
 `
-const StyledInput = styled.input`
-  // position: absolute;
-  // opacity: 0;
-  // cursor: pointer;
-  // height: 0;
-  // width: 0;
-`
-
-const StyledCheckbox = styled.span`
-  // display: block;
-  // position: relative;
-  // height: 12px; 
-  // width: 12px; 
-  // background-color: white; 
-  // border-radius: 2px;
-  // border: 1px solid lightgray;
-  // cursor: pointer;
-  // @media ${device.mobileS} {
-  //   top: 15px;
-  // }
-
-  // @media ${device.tablet} {
-  //   top: 12px;
-  //   left: 5px;
-
-  //   &:hover {
-  //     background-color: lightgray;
-  //   }
-  // }
-
-  //   &:checked {
-  //     background-color: black;
-  //   }
-
-`
 
 const GroceryItem = styled.div`
   width: 100%;
@@ -295,7 +245,7 @@ const GroceryLabel = styled.label`
 
 const GroceryLabelMobileHeading = styled.label`
   font-weight: 500;
-  padding-left: 20px;
+  // padding-left: 20px;
 
   @media ${device.mobileS} {
     display: inline-block;
