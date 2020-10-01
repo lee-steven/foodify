@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import trashIcon from '../images/trash.png'
 import SearchIcon from '../images/search.svg'
+import SearchWhiteIcon from '../images/search-white.svg'
+import PlusIcon from '../images/plus.svg'
 import { device } from '../constants/styled'
 import { Checkbox, useCheckboxState } from 'pretty-checkbox-react'
 
@@ -79,7 +81,14 @@ const MyGroceries = ({groceries, checkbox, handleSubmit, modalButtonClick}) => {
           <SearchInput type='text' placeholder='Search...' onChange={onSearchChange} />
         </SearchInputContainer>
         <ButtonContainer>
-          <Button onClick={toggleButton === 'Add New Grocery Item' ? modalButtonClick : handleSubmit}>{toggleButton}</Button>
+          <Button onClick={toggleButton === 'Add New Grocery Item' ? modalButtonClick : handleSubmit}>
+            {
+              toggleButton === 'Add New Grocery Item' 
+                ? <ButtonIcon src={PlusIcon} />
+                : <ButtonIcon src={SearchWhiteIcon} />
+            }
+            {toggleButton}
+          </Button>
         </ButtonContainer>
       </div>
 
@@ -149,6 +158,7 @@ const SearchInput = styled.input`
   border-radius: 10px;
   border: 1px solid #D6D6D6;
   outline: none;
+  color: gray;
 
   ::placeholder {
     color: #AAAAAA;
@@ -187,6 +197,13 @@ const Button = styled.button`
     cursor: pointer;
   }
 `
+
+const ButtonIcon = styled.img`
+  position: relative;
+  top: 3px;
+  left: -8px;
+`
+
 const Categories = styled.div`
   @media ${device.mobileS} {
     display: none;
